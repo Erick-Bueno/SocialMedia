@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj": {}
+    "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj": {}
   },
   "projects": {
-    "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj": {
+    "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
+        "projectPath": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\erick\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\obj\\",
+        "outputPath": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\erick\\AppData\\Roaming\\NuGet\\NuGet.Config"

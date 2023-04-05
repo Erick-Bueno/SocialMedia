@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q/5hNf89m3UO1Ij+c7dgoq37IgryaGeMXCCFEcfvrtEVxveWDnrx3gy2hGDt5PCiAvQVRuUQtzEczpA5bfcSvg==",
+  "dgSpecHash": "a9gHinSPWzEtQBtlsPHS6MIwUJTXTXjYfpIPR+sdDap74wxfmJ8lrLyMFirqY3RD39pWPCxVKwq7EZ0uzzgWZg==",
   "success": true,
-  "projectFilePath": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
+  "projectFilePath": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\erick\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\erick\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
