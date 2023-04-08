@@ -6,7 +6,7 @@ public class FriendsMap : IEntityTypeConfiguration<FriendsModel>
     public void Configure(EntityTypeBuilder<FriendsModel> builder)
     {
         builder.HasKey(f => f.id);
-
+       
         builder.HasOne(u => u.userModel)
         .WithMany( u=> u.UsersFriends)
         .HasForeignKey(f => f.user_id);

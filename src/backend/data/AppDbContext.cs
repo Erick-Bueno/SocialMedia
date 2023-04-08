@@ -12,6 +12,7 @@ public class AppDbContext : DbContext
     public DbSet<CommentModel> Comments {get;set;}
     public DbSet<FriendsModel> Friends {get; set;}
     public DbSet<RequestsModel> Requests {get; set;}
+    public DbSet<TokenModel> Token {get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         modelBuilder.ApplyConfiguration(new PostMap());
@@ -20,6 +21,7 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new CommentMap());
         modelBuilder.ApplyConfiguration(new FriendsMap());
         modelBuilder.ApplyConfiguration(new RequestsMap());
+        modelBuilder.ApplyConfiguration(new TokenMap());
         base.OnModelCreating(modelBuilder);
     }
 }

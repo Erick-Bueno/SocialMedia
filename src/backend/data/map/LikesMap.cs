@@ -6,7 +6,7 @@ public class LikesMap : IEntityTypeConfiguration<LikesModel>
     public void Configure(EntityTypeBuilder<LikesModel> builder)
     {
         builder.HasKey(l => l.id);
-
+       
         builder.HasOne(p =>p.postModel)
             .WithMany(l =>l.postLikes)
             .HasForeignKey(l => l.Posts_id);

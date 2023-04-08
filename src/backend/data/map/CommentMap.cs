@@ -6,7 +6,8 @@ public class CommentMap : IEntityTypeConfiguration<CommentModel>
     public void Configure(EntityTypeBuilder<CommentModel> builder)
     {
         builder.HasKey(c => c.id);
-
+        builder.Property(c => c.comment).IsRequired().HasMaxLength(600);
+    
         builder.HasOne(u => u.userModel)
             .WithMany(c => c.userComments)
             .HasForeignKey(c=> c.User_id);
