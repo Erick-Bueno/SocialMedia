@@ -10,8 +10,9 @@ public class RequestsModel
 
     public Guid Requester_id {get; set;}
     public Guid Receiver_id{get; set;}
-
+    
     public UserModel userModel {get; set;}
+  
     public UserModel UserModel2 { get; set;}
 
 }

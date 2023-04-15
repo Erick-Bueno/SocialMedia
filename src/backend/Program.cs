@@ -10,7 +10,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(u => u.UseMySql("server = localhost; database=mediaSocial; user=root; password=sirlei231;", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.29-mysql")));
-
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
