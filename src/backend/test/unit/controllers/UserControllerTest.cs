@@ -23,15 +23,25 @@ public class UserControllerTest
     [Fact]
     async public void return_okobjectresult_test()
     {
+        var filephotomock = new Mock<IFormFile>();
+        var memoryStream = new MemoryStream();
+        var writeFile = new StreamWriter(memoryStream);
+        writeFile.Write("arquivo de teste");
+        writeFile.Flush();
+        memoryStream.Position = 0;
+        var filePhoto = "imagem.jpg";
+        userDto.userimagefile = filephotomock.Object;
         var UserServiceMock = new Mock<IUserService>();
+
+        
 
         var userController = new User.Controllers.User(UserServiceMock.Object);
 
         ResponseRegister ResponseTest = new ResponseRegister(Guid.NewGuid(), 200, "usuario cadastrado");
 
-        UserServiceMock.Setup(us => us.register(userDto)).ReturnsAsync(ResponseTest);
+        UserServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(ResponseTest);
 
-        var result = await userController.RegisterUser(userDto);
+        var result = await userController.RegisterUser(userDto,userDto.userimagefile);
     
 
         Assert.IsType<OkObjectResult>(result.Result);
@@ -41,13 +51,14 @@ public class UserControllerTest
     {
         var userServiceMock = new Mock<IUserService>();
 
+        
         var UserControllerTest = new User.Controllers.User(userServiceMock.Object);
 
         ResponseRegister responseRegisterTest = new ResponseRegister(Guid.NewGuid(), 200, "usuario cadastrado");
 
-        userServiceMock.Setup(us => us.register(userDto)).ReturnsAsync(responseRegisterTest);
+        userServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(responseRegisterTest);
 
-        var result = await UserControllerTest.RegisterUser(userDto);
+        var result = await UserControllerTest.RegisterUser(userDto,userDto.userimagefile);
 
         var OkObjectResult = Assert.IsType<OkObjectResult>(result.Result);
       

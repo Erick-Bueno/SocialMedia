@@ -5,4 +5,5 @@ public class UserRegisterDto
     public string Email{get;set;}
     public string Password{get;set;}
     public string? User_Photo{get; set;}
+    public IFormFile userimagefile {get; set;}
 }
