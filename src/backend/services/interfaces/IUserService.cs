@@ -4,4 +4,5 @@ public interface IUserService
     UserModel convertUserDtoToUserModel(UserRegisterDto userDto, string url);
 
     public void SaveUserPhoto(string img, IFormFile imgfile);
+    
 }

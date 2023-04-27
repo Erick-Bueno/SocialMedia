@@ -1,19 +1,26 @@
+using System.ComponentModel.DataAnnotations;
 using BCrypt.Net;
 public class UserService : IUserService
 {
     private readonly IUserRepository userRepository;
+    private readonly ITokenRepository tokenRepository;
     private readonly IWebHostEnvironment webHostEnvironment;
 
-    public UserService(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment)
+    public UserService(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment, ITokenRepository tokenRepository)
     {
         this.userRepository = userRepository;
         this.webHostEnvironment = webHostEnvironment;
+        this.tokenRepository = tokenRepository;
     }
 
       async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
     {
+        var userExists = userRepository.user_registred(userDto.Email);
+        if(userExists == true){
+            throw new ValidationException("Email já cadastrado");
+        }
         if(imagefileuser.ContentType != "image/jpeg" && imagefileuser.ContentType != "image/png"){
-            throw new Exception("Informe uma imagem valida");
+            throw new ValidationException("Informe uma imagem valida");
         }
         var fileurlphoto = Guid.NewGuid() + imagefileuser.FileName;
         SaveUserPhoto(fileurlphoto, imagefileuser);
@@ -22,7 +29,17 @@ public class UserService : IUserService
         userModel.Password = encryptedPassword;
 
         var UserRegistered = await userRepository.Register(userModel);
-        ResponseRegister rp = new ResponseRegister(UserRegistered.id, 200, "usuario cadastrado");
+        var jwt = new Jwt();
+        var token = jwt.generateJwt(userModel);
+    
+        TokenModel tokenmodel = new TokenModel();
+        tokenmodel.Email = userModel.Email;
+        tokenmodel.jwt = token;
+
+        var addtoken = await tokenRepository.addUserToken(tokenmodel);
+      
+        
+        ResponseRegister rp = new ResponseRegister( 200,"usuario cadastrado",UserRegistered.id, token);
         //adicionar imagem em pasta na web e criar se n existir
         return rp;
         
@@ -46,10 +63,10 @@ public class UserService : IUserService
         if(!Directory.Exists(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img)){
             Directory.CreateDirectory(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\");
         }
-        //possibilitando o salvamento de arquivos no meu path do wwwroot
+        //criando o arquivo no diretorio especificado
         var stream = System.IO.File.Create(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img);
 
-        //copiando o arquivo do meu Iform file(fluxo de entrada) para o stram fluxo de saida
+        //copiar o conteudo do arquivo e salva no aqrquivo criado
         await imguser.CopyToAsync(stream);
 
      }

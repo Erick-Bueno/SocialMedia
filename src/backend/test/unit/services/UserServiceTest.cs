@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Moq;
 using Xunit;
@@ -33,8 +34,9 @@ public class UserServiceTest
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         var UserRepositoryMock = new Mock<IUserRepository>();
+        var tokenRepository = new Mock<ITokenRepository>();
             
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object);
+        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
 
         //simulated formfile
         var filephotomock = new Mock<IFormFile>();
@@ -80,11 +82,11 @@ public class UserServiceTest
         filephotomock.Setup(f => f.ContentType).Returns("image/jpeg");
 
         var urlphoto = Guid.NewGuid() + userDto.userimagefile.FileName;
-      
+        var tokenRepository = new Mock<ITokenRepository>();
         var UserRepositoryMock = new Mock<IUserRepository>();
         UserRepositoryMock.Setup(ur => ur.Register(userModeltest)).ReturnsAsync(userModeltest);
 
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object);
+        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
 
         var result = UserService.convertUserDtoToUserModel(userDto, urlphoto);
 
@@ -96,7 +98,7 @@ public class UserServiceTest
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         IWebHostEnvironmentMock.Setup(wh => wh.WebRootPath).Returns("C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot");
-
+        var tokenRepository = new Mock<ITokenRepository>();
         var nomeimg = "teste.png";
         var IFormFileMock = new Mock<IFormFile>();
         var StreamMock = new MemoryStream();
@@ -105,7 +107,7 @@ public class UserServiceTest
 
    
         var userRepositoryMock = new Mock<IUserRepository>();
-        var userService = new UserService(userRepositoryMock.Object,IWebHostEnvironmentMock.Object);
+        var userService = new UserService(userRepositoryMock.Object,IWebHostEnvironmentMock.Object, tokenRepository.Object);
 
         userService.SaveUserPhoto(nomeimg, IFormFileMock.Object);
         
@@ -118,25 +120,49 @@ public class UserServiceTest
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         var filephotomock = new Mock<IFormFile>();
+
+        var tokenRepository = new Mock<ITokenRepository>();
         var memoryStream = new MemoryStream();
         var writeFile = new StreamWriter(memoryStream);
         writeFile.Write("arquivo de teste");
         writeFile.Flush();
         memoryStream.Position = 0;
-        var filePhoto = "imagem.jpg";
+       
         userDto.userimagefile = filephotomock.Object;
-        filephotomock.Setup(f => f.FileName).Returns(filePhoto);
+        
         filephotomock.Setup(f => f.ContentType).Returns("image/csv");  
 
         var UserMockRepository = new Mock<IUserRepository>();
 
         UserMockRepository.Setup(um => um.Register(userModeltest)).ReturnsAsync(userModeltest);
 
-        var UserService = new UserService(UserMockRepository.Object, IWebHostEnvironmentMock.Object);
+        var UserService = new UserService(UserMockRepository.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
 
-        var result = UserService.register(userDto, userDto.userimagefile);
+        var result =  UserService.register(userDto, userDto.userimagefile);
 
-        await Assert.ThrowsAsync<Exception>(() => result);
+        await Assert.ThrowsAsync<ValidationException>(() => result);
 
     } 
+    [Fact]
+   async  public void User_registred_true_Exception_test()
+    {
+        var filephotomock = new Mock<IFormFile>();
+        var memoryStream = new MemoryStream();
+        var writeFile = new StreamWriter(memoryStream);
+        writeFile.Write("arquivo de teste");
+        writeFile.Flush();
+        memoryStream.Position = 0;
+        userDto.userimagefile = filephotomock.Object;
+
+        var tokenRepository = new Mock<ITokenRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object,tokenRepository.Object);
+
+        userRepositoryMock.Setup(ur => ur.user_registred(userDto.Email)).Returns(true);
+     
+        var result =  userService.register(userDto, userDto.userimagefile );
+
+       await Assert.ThrowsAsync<ValidationException>(() => result);
+    }
 }

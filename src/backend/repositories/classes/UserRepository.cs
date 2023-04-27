@@ -20,4 +20,13 @@ public class UserRepository : IUserRepository
    
       
     }
+
+    public bool user_registred(string Email)
+    {
+        var UserRegistred = _context.Users.Where(u => u.Email == Email);
+        if(UserRegistred.Any()){
+            return true;
+        }
+        return false;
+    }
 }

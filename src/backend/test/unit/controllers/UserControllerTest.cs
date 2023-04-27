@@ -37,7 +37,7 @@ public class UserControllerTest
 
         var userController = new User.Controllers.User(UserServiceMock.Object);
 
-        ResponseRegister ResponseTest = new ResponseRegister(Guid.NewGuid(), 200, "usuario cadastrado");
+         ResponseRegister ResponseTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(), "testejwt");
 
         UserServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(ResponseTest);
 
@@ -54,7 +54,7 @@ public class UserControllerTest
         
         var UserControllerTest = new User.Controllers.User(userServiceMock.Object);
 
-        ResponseRegister responseRegisterTest = new ResponseRegister(Guid.NewGuid(), 200, "usuario cadastrado");
+        ResponseRegister responseRegisterTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(),"testejwt");
 
         userServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(responseRegisterTest);
 
