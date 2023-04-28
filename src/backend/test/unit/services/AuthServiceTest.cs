@@ -2,13 +2,14 @@ using System.ComponentModel.DataAnnotations;
 using Moq;
 using Xunit;
 
+
 public class AuthServiceTest
 {
     [Fact]
-    public void User_not_registred_Exception_Test()
+    async public void User_not_registred_Exception_Test()
     {
             var BCryptMock = new Mock<IBcryptTest>();   
-          
+            var TokenRepositoryMock = new Mock<ITokenRepository>();
             UserModel userModeltest = new UserModel();
             userModeltest.id = Guid.NewGuid();
             userModeltest.Email = "erickjb93@gmail.com";
@@ -27,18 +28,21 @@ public class AuthServiceTest
         var AuthRepositoryMock = new Mock<IAuthRepository>();
         AuthRepositoryMock.Setup(ar => ar.SearchingForEmail(loginData)).Returns((UserModel)null);
 
-        var AuthService = new AuthService(AuthRepositoryMock.Object, BCryptMock.Object);
+        var jwt = new Mock<Jwt>();
 
-        Assert.Throws<ValidationException>(() =>  AuthService.login(loginData));
+        var AuthService = new AuthService(AuthRepositoryMock.Object, BCryptMock.Object, TokenRepositoryMock.Object, jwt.Object);
+
+        await Assert.ThrowsAsync<ValidationException>(() =>  AuthService.login(loginData));
         
     }
     [Fact]
-    public void User_password_invalid_exception_Test()
+    async public void User_password_invalid_exception_Test()
     {
         var AuthRepositoryMock = new Mock<IAuthRepository>();
         var BCryptMock = new Mock<IBcryptTest>();       
-        
-        var AuthService = new AuthService(AuthRepositoryMock.Object, BCryptMock.Object);
+        var TokenRepositoryMock = new Mock<ITokenRepository>();
+         var jwt = new Mock<Jwt>();
+        var AuthService = new AuthService(AuthRepositoryMock.Object, BCryptMock.Object, TokenRepositoryMock.Object, jwt.Object);
         var PasswordCrypt = BCrypt.Net.BCrypt.HashPassword("Sirlei231");
         UserModel userModeltest = new UserModel();
         userModeltest.id = Guid.NewGuid();
@@ -61,10 +65,101 @@ public class AuthServiceTest
 
        BCryptMock.Setup(bc => bc.verify(loginData.Senha,userModeltest.Password)).Returns(false);
 
-        Assert.Throws<ValidationException>(()=> AuthService.login(loginData));
+        await Assert.ThrowsAsync<ValidationException>(()=> AuthService.login(loginData));
 
 
 
 
     }
+    [Fact]
+    async public void User_not_logged_before_test()
+    {
+     var AuthRepositoryMock = new Mock<IAuthRepository>();
+
+     var bCrypt = new Mock<IBcryptTest>();
+
+     var TokenRepositoryMock = new Mock<ITokenRepository>();
+     
+      UserModel userModeltest = new UserModel();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.Email = "erickjb93@gmail.com";
+        userModeltest.Password =  BCrypt.Net.BCrypt.HashPassword("senhainvalida");
+        userModeltest.UserName = "erick";
+        userModeltest.Telephone ="77799591703";
+        userModeltest.User_Photo =  "llll";
+
+        
+        UserLoginDto loginData = new UserLoginDto();
+        loginData.Email = userModeltest.Email;
+        loginData.Senha = "senhainvalida";
+       
+
+        TokenModel token = new TokenModel();
+        token.Email = "erickjb93@gmail.com";
+        token.id = Guid.NewGuid();
+        token.jwt = "jwtteste";
+       var jwt = new Mock<Jwt>();
+        var AuthService = new AuthService(AuthRepositoryMock.Object,bCrypt.Object, TokenRepositoryMock.Object, jwt.Object);
+
+        
+
+     AuthRepositoryMock.Setup(ar => ar.SearchingForEmail(loginData)).Returns(userModeltest);
+     AuthRepositoryMock.Setup(ar => ar.LoggedInBeffore(loginData.Email)).Returns((TokenModel)null);
+     TokenRepositoryMock.Setup(tk => tk.addUserToken(token)).ReturnsAsync(token);
+     bCrypt.Setup(bc => bc.verify(loginData.Senha, userModeltest.Password)).Returns(true);
+
+     var Result =await AuthService.login(loginData);
+
+     ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", userModeltest.id,"tokenteste");
+
+     Assert.IsType<ResponseRegister>(Result);
+
+
+    }
+    [Fact]
+    async public void User_logged_before_Test()
+    {
+        var AuthRepositoryMock = new Mock<IAuthRepository>();
+
+     var bCrypt = new Mock<IBcryptTest>();
+
+     var TokenRepositoryMock = new Mock<ITokenRepository>();
+     
+      UserModel userModeltest = new UserModel();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.Email = "erickjb93@gmail.com";
+        userModeltest.Password =  BCrypt.Net.BCrypt.HashPassword("senhainvalida");
+        userModeltest.UserName = "erick";
+        userModeltest.Telephone ="77799591703";
+        userModeltest.User_Photo =  "llll";
+
+        
+        UserLoginDto loginData = new UserLoginDto();
+        loginData.Email = userModeltest.Email;
+        loginData.Senha = "senhainvalida";
+       
+
+        TokenModel token = new TokenModel();
+        token.Email = "erickjb93@gmail.com";
+        token.id = Guid.NewGuid();
+        token.jwt = "jwtteste";
+        var newJwt = "jwtnovo";
+       var jwt = new Mock<Jwt>();
+        var AuthService = new AuthService(AuthRepositoryMock.Object,bCrypt.Object, TokenRepositoryMock.Object, jwt.Object);
+
+        
+
+     AuthRepositoryMock.Setup(ar => ar.SearchingForEmail(loginData)).Returns(userModeltest);
+     AuthRepositoryMock.Setup(ar => ar.LoggedInBeffore(loginData.Email)).Returns(token);
+     TokenRepositoryMock.Setup(tk => tk.UpdateToken(token, newJwt)).ReturnsAsync(token);
+     bCrypt.Setup(bc => bc.verify(loginData.Senha, userModeltest.Password)).Returns(true);
+
+     var Result = await AuthService.login(loginData);
+
+     ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", userModeltest.id,"tokenteste");
+
+     Assert.IsType<ResponseRegister>(Result);
+    
+    }
+    
 }

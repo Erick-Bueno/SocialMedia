@@ -6,11 +6,14 @@ public class UserService : IUserService
     private readonly ITokenRepository tokenRepository;
     private readonly IWebHostEnvironment webHostEnvironment;
 
-    public UserService(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment, ITokenRepository tokenRepository)
+    private readonly Ijwt jwt;
+
+    public UserService(IUserRepository userRepository, IWebHostEnvironment webHostEnvironment, ITokenRepository tokenRepository, Ijwt jwt)
     {
         this.userRepository = userRepository;
         this.webHostEnvironment = webHostEnvironment;
         this.tokenRepository = tokenRepository;
+        this.jwt = jwt;
     }
 
       async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
@@ -29,7 +32,7 @@ public class UserService : IUserService
         userModel.Password = encryptedPassword;
 
         var UserRegistered = await userRepository.Register(userModel);
-        var jwt = new Jwt();
+
         var token = jwt.generateJwt(userModel);
     
         TokenModel tokenmodel = new TokenModel();

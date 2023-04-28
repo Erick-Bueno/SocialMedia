@@ -11,6 +11,16 @@ public class TokenRepository : ITokenRepository
     {
        var addUserToken = await _context.Token.AddAsync(token);
        await _context.SaveChangesAsync();
+      
        return token;
+    }
+
+    public async Task<TokenModel> UpdateToken(TokenModel token, string jwt)
+    {
+      
+        token.jwt = jwt;
+
+        await _context.SaveChangesAsync();
+        return token;
     }
 }

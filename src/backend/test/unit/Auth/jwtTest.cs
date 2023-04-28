@@ -43,4 +43,26 @@ public class jwtTest
 
      Assert.Equal(result, tokenModel);
     }
+    [Fact]
+    async public void Update_token_test()
+    {
+      var options = new DbContextOptionsBuilder<AppDbContext>()
+      .UseInMemoryDatabase(databaseName:"teste")
+      .Options;
+
+      var AppDbContextMock = new Mock<AppDbContext>(options);
+
+      var tokenModel = new TokenModel();
+      tokenModel.Email = "erickjb93@gmail.com";
+      tokenModel.id = Guid.NewGuid();
+      tokenModel.jwt = "jwtTeste";
+
+
+      AppDbContextMock.Setup(db => db.SaveChangesAsync(CancellationToken.None)).ReturnsAsync(1);
+
+      var TokenRepository = new TokenRepository(AppDbContextMock.Object);
+      var result = await TokenRepository.UpdateToken(tokenModel, "jwtnovo");
+
+      Assert.Equal(result, tokenModel);
+    }
 }

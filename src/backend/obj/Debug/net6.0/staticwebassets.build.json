@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ouh/Nbd9ODiCfV0PjwjIOs7ToQF51Mp+0hdZ2ZafE6g=",
+  "Hash": "ko3T3lL+BXaChjqdRcDnDqypMXN59cLggwsaEMCZ6tk=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -187,6 +187,23 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\73a75e7b-0299-4905-a387-47c4ca66c6afcaminhao-de-entrega.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "UsersProfileImages/8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\UsersProfileImages\\8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -202,6 +219,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "UsersProfileImages/9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\UsersProfileImages\\9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9f6fc81e-9806-48fe-8f45-94a2e2dc4ce8caminhao-de-entrega.png",

@@ -19,6 +19,7 @@ builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IBcryptTest, BcryptTest>();
+builder.Services.AddScoped<Ijwt, Jwt>();
 var chave = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET"));
 
 builder.Services.AddAuthentication(x =>

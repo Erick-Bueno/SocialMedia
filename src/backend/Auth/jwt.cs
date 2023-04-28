@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
-public class Jwt
+public class Jwt:Ijwt
 {
     public string generateJwt(UserModel user){
         String jwt_secret = Environment.GetEnvironmentVariable("JWT_SECRET");

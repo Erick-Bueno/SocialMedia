@@ -18,4 +18,6 @@ public class AuthRepository : IAuthRepository
         var FindEmail = _context.Users.Where(u => u.Email == loginData.Email).FirstOrDefault();
         return FindEmail;
     }
+
+   
 }

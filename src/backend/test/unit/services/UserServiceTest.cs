@@ -35,8 +35,9 @@ public class UserServiceTest
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         var UserRepositoryMock = new Mock<IUserRepository>();
         var tokenRepository = new Mock<ITokenRepository>();
+        var jwt = new Mock<Ijwt>();
             
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
+        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
         //simulated formfile
         var filephotomock = new Mock<IFormFile>();
@@ -77,6 +78,7 @@ public class UserServiceTest
         writeFile.Flush();
         memoryStream.Position = 0;
         var filePhoto = "imagem.jpg";
+        var jwt = new Mock<Ijwt>();
         userDto.userimagefile = filephotomock.Object;
         filephotomock.Setup(f => f.FileName).Returns(filePhoto);
         filephotomock.Setup(f => f.ContentType).Returns("image/jpeg");
@@ -86,7 +88,7 @@ public class UserServiceTest
         var UserRepositoryMock = new Mock<IUserRepository>();
         UserRepositoryMock.Setup(ur => ur.Register(userModeltest)).ReturnsAsync(userModeltest);
 
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
+        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
         var result = UserService.convertUserDtoToUserModel(userDto, urlphoto);
 
@@ -104,10 +106,10 @@ public class UserServiceTest
         var StreamMock = new MemoryStream();
         IFormFileMock.Setup(ff => ff.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
      
-
+        var jwt = new Mock<Ijwt>();
    
         var userRepositoryMock = new Mock<IUserRepository>();
-        var userService = new UserService(userRepositoryMock.Object,IWebHostEnvironmentMock.Object, tokenRepository.Object);
+        var userService = new UserService(userRepositoryMock.Object,IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
         userService.SaveUserPhoto(nomeimg, IFormFileMock.Object);
         
@@ -135,8 +137,8 @@ public class UserServiceTest
         var UserMockRepository = new Mock<IUserRepository>();
 
         UserMockRepository.Setup(um => um.Register(userModeltest)).ReturnsAsync(userModeltest);
-
-        var UserService = new UserService(UserMockRepository.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object);
+        var jwt = new Mock<Ijwt>();
+        var UserService = new UserService(UserMockRepository.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
         var result =  UserService.register(userDto, userDto.userimagefile);
 
@@ -153,11 +155,11 @@ public class UserServiceTest
         writeFile.Flush();
         memoryStream.Position = 0;
         userDto.userimagefile = filephotomock.Object;
-
+        var jwt = new Mock<Ijwt>();
         var tokenRepository = new Mock<ITokenRepository>();
         var userRepositoryMock = new Mock<IUserRepository>();
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
-        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object,tokenRepository.Object);
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object,tokenRepository.Object, jwt.Object);
 
         userRepositoryMock.Setup(ur => ur.user_registred(userDto.Email)).Returns(true);
      
