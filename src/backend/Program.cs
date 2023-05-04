@@ -1,5 +1,6 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,6 +21,10 @@ builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IBcryptTest, BcryptTest>();
 builder.Services.AddScoped<Ijwt, Jwt>();
+builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddSignalR();
+builder.Services.AddCors();
 var chave = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET"));
 
 builder.Services.AddAuthentication(x =>
@@ -38,7 +43,13 @@ builder.Services.AddAuthentication(x =>
     };
 });
 var app = builder.Build();
-
+app.UseCors(c => {
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowCredentials();
+    c.WithOrigins("http://localhost:8080");
+});;
+app.UseRouting();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -46,6 +57,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+    endpoints.MapHub<HubSolicitation>("/solicitation");
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

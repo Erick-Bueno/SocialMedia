@@ -53,3 +53,5 @@ C:\Users\erick\Documents\GitHub\SocialMedia\src\backend\obj\Debug\net6.0\ref\bac
 c:\Users\erick\Documents\GitHub\SocialMedia\src\backend\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
 c:\Users\erick\Documents\GitHub\SocialMedia\src\backend\bin\Debug\net6.0\BCrypt.Net.dll
 C:\Users\erick\Documents\GitHub\SocialMedia\src\backend\bin\Debug\net6.0\backend.staticwebassets.runtime.json
+C:\Users\erick\Documents\GitHub\SocialMedia\src\backend\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\erick\Documents\GitHub\SocialMedia\src\backend\bin\Debug\net6.0\System.Net.WebSockets.WebSocketProtocol.dll

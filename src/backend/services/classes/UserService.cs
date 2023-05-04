@@ -73,4 +73,10 @@ public class UserService : IUserService
         await imguser.CopyToAsync(stream);
 
      }
+
+    public async Task<UserModel> FindUserRequester(Guid id)
+    {
+       var UserData = await userRepository.FindUserRequester(id);
+       return UserData;
+    }
 }

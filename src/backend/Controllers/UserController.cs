@@ -1,6 +1,7 @@
 namespace User.Controllers
 {
     using System.ComponentModel.DataAnnotations;
+    using System.Data.Common;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,11 @@ namespace User.Controllers
                  return BadRequest(error_user_registered);
                 
 
+            }
+            catch(DbException ex)
+            {
+                var error_user_registered = new ReponseErrorRegister(500, ex.Message);
+                return StatusCode(500, error_user_registered );
             }
             
         }

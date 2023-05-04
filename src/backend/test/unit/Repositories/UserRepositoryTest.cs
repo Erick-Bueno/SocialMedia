@@ -125,6 +125,30 @@ public class UserRepositoryTest
       var result = UserRepository.user_registred(userModeltest.Email);
       Assert.False(result);
     }
+
+    [Fact]
+    public async void find_user_requester_test()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
+
+        var AppDbContextMock = new Mock<AppDbContext>(options);
+
+        UserModel userModeltest = new UserModel();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.Email = "erickjb93@gmail.com";
+        userModeltest.Password = "Sirlei231";
+        userModeltest.UserName = "erick";
+        userModeltest.Telephone ="77799591703";
+        userModeltest.User_Photo =  "llll";
+        
+        AppDbContextMock.Setup(db => db.Users.FindAsync(userModeltest.id)).ReturnsAsync(userModeltest);
+
+        var UserRepository = new UserRepository(AppDbContextMock.Object);
+
+        var result = await UserRepository.FindUserRequester(userModeltest.id);
+
+        Assert.Equal(result, userModeltest);
+    }
  
  
     

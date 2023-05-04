@@ -167,4 +167,27 @@ public class UserServiceTest
 
        await Assert.ThrowsAsync<ValidationException>(() => result);
     }
+    [Fact]
+    public async void find_user_requester_test()
+    {
+        var UserRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModeltest = new UserModel();
+        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
+        var tokenRepositoryMock = new Mock<ITokenRepository>();
+        var jwtmock = new Mock<Ijwt>();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.Email = "erickjb93@gmail.com";
+        userModeltest.Password = "Sirlei231";
+        userModeltest.UserName = "erick";
+        userModeltest.Telephone ="77799591703";
+        userModeltest.User_Photo =  "llll";
+
+        UserRepositoryMock.Setup(ur => ur.FindUserRequester(userModeltest.id)).ReturnsAsync(userModeltest);
+
+        var userService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object );
+
+        var result = await userService.FindUserRequester(userModeltest.id);
+
+        Assert.Equal(result, userModeltest);
+    }    
 }
