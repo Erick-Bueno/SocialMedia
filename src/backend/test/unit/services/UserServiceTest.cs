@@ -161,7 +161,7 @@ public class UserServiceTest
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object,tokenRepository.Object, jwt.Object);
 
-        userRepositoryMock.Setup(ur => ur.user_registred(userDto.Email)).Returns(true);
+        userRepositoryMock.Setup(ur => ur.user_registred(userDto.Email)).Returns(userModeltest);
      
         var result =  userService.register(userDto, userDto.userimagefile );
 

@@ -5,7 +5,7 @@ using Xunit;
 public class RequestRepositoryTest
 {
     [Fact]
-   async public void Request_create_return_Test()
+   async public void should_return_request_data_when_is_created()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
 
@@ -29,7 +29,7 @@ public class RequestRepositoryTest
         Assert.Equal(requests, result);
     }
     [Fact]
-    public void Find_requests_return_Test()
+    public void should_to_find_and_return_requests_according_to_requesterid_and_receiverid()
     {
         RequestsModel requests = new RequestsModel();
         var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
@@ -58,12 +58,6 @@ public class RequestRepositoryTest
 
         var result = RequestRepository.FindRequest(requests.Receiver_id,requests.Requester_id);
         Assert.Equal(result, requests);
-    }
-
-    [Fact]
-    public void Exception_request_exists_Test()
-    {
-       
     }
 
 }

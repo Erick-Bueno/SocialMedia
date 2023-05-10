@@ -5,7 +5,7 @@ using Xunit;
 public class jwtTest
 {
     [Fact]
-    public void Generate_Jwt_Test()
+    public void should_generate_Jwt()
     {
       UserModel userModeltest = new UserModel();
       userModeltest.id = Guid.NewGuid();
@@ -22,7 +22,7 @@ public class jwtTest
         Assert.IsType<String>(result);
     }
     [Fact]
-   async  public void add_token_test()
+   async  public void should_to_add_token()
     {
       var options = new DbContextOptionsBuilder<AppDbContext>()
       .UseInMemoryDatabase(databaseName:"teste")
@@ -44,7 +44,7 @@ public class jwtTest
      Assert.Equal(result, tokenModel);
     }
     [Fact]
-    async public void Update_token_test()
+    async public void should_update_token()
     {
       var options = new DbContextOptionsBuilder<AppDbContext>()
       .UseInMemoryDatabase(databaseName:"teste")

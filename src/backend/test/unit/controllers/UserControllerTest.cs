@@ -21,7 +21,7 @@ public class UserControllerTest
         
     }
     [Fact]
-    async public void return_okobjectresult_test()
+    async public void should_to_effect_user_register()
     {
         var filephotomock = new Mock<IFormFile>();
         var memoryStream = new MemoryStream();
@@ -47,7 +47,7 @@ public class UserControllerTest
         Assert.IsType<OkObjectResult>(result.Result);
     }
      [Fact]
-    async public void return_okobjectresultcontent_test()
+    async public void should_to_check_the_content_in_okobjectresult_returned_in_register()
     {
         var userServiceMock = new Mock<IUserService>();
 

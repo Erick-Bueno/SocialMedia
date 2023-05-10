@@ -6,7 +6,7 @@ using Xunit;
 public class AuthServiceTest
 {
     [Fact]
-    async public void User_not_registred_Exception_Test()
+    async public void should_thrown_exception_invalid_email()
     {
             var BCryptMock = new Mock<IBcryptTest>();   
             var TokenRepositoryMock = new Mock<ITokenRepository>();
@@ -36,7 +36,7 @@ public class AuthServiceTest
         
     }
     [Fact]
-    async public void User_password_invalid_exception_Test()
+    async public void should_thrown_exception_invalid_password()
     {
         var AuthRepositoryMock = new Mock<IAuthRepository>();
         var BCryptMock = new Mock<IBcryptTest>();       
@@ -72,7 +72,7 @@ public class AuthServiceTest
 
     }
     [Fact]
-    async public void User_not_logged_before_test()
+    async public void should_to_effect_user_login_who_never_logged_in_before()
     {
      var AuthRepositoryMock = new Mock<IAuthRepository>();
 
@@ -117,7 +117,7 @@ public class AuthServiceTest
 
     }
     [Fact]
-    async public void User_logged_before_Test()
+    async public void should_to_effect_user_login_who_have_already_logged_in_before()
     {
         var AuthRepositoryMock = new Mock<IAuthRepository>();
 

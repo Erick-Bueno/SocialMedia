@@ -9,7 +9,7 @@ public class UserRepositoryTest
 
   
     [Fact]
-   async public void register_user_return_test()
+   async public void should_to_register_user()
     {
       
     
@@ -58,7 +58,7 @@ public class UserRepositoryTest
     }
 
     [Fact]
-     public void user_registred_return_true_test()
+     public void should_to_check_if_user_is_already_registered()
     {
       
       UserModel userModeltest = new UserModel();
@@ -92,11 +92,11 @@ public class UserRepositoryTest
 
       var result = UserRepository.user_registred(userModeltest.Email);
 
-      Assert.True(result);
+      Assert.Equal(result, userModeltest);
 
     }
     [Fact]
-    public void user_registred_return_false_test()
+    public void should_to_verify_user_not_registered()
     {
       UserModel userModeltest = new UserModel();
       userModeltest.id = Guid.NewGuid();
@@ -123,11 +123,11 @@ public class UserRepositoryTest
       
       var UserRepository = new UserRepository(DbContextMock.Object);
       var result = UserRepository.user_registred(userModeltest.Email);
-      Assert.False(result);
+      Assert.Equal(result, null);
     }
 
     [Fact]
-    public async void find_user_requester_test()
+    public async void should_to_find_requester_user()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
 

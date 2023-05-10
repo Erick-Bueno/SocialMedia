@@ -6,7 +6,7 @@ using Xunit;
 public class AuthRepositoryTest
 {
     [Fact]
-     public void Email_incorrect_exception_test()
+     public void  should_to_find_user_by_your_email()
     {
        
       
@@ -45,7 +45,7 @@ public class AuthRepositoryTest
     }    
 
     [Fact]
-    public void TestName()
+    public void should_to_find_token_data_from_user_email()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
         .UseInMemoryDatabase(databaseName:"teste")

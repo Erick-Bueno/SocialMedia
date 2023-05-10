@@ -6,7 +6,7 @@ using auth.Controllers;
 public class AuthControllerTest
 {
     [Fact]
-    async public void Login_auth_return_OkObjectResult_Test()
+    async public void should_to_effect_user_login()
     {
        var AuthServiceMock = new Mock<IAuthService>();
         UserLoginDto loginData = new UserLoginDto();
@@ -25,7 +25,7 @@ public class AuthControllerTest
 
 
     [Fact]
-    async public void content_OkObjectResult_login_Test()
+    async public void should_to_check_the_content_in_okobjectresult_returned_in_login()
     {
        var AuthServiceMock = new Mock<IAuthService>();
         UserLoginDto loginData = new UserLoginDto();

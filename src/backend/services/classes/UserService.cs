@@ -19,7 +19,7 @@ public class UserService : IUserService
       async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
     {
         var userExists = userRepository.user_registred(userDto.Email);
-        if(userExists == true){
+        if(userExists != null){
             throw new ValidationException("Email já cadastrado");
         }
         if(imagefileuser.ContentType != "image/jpeg" && imagefileuser.ContentType != "image/png"){
