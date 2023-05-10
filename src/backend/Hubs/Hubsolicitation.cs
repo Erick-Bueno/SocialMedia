@@ -4,12 +4,16 @@ public class HubSolicitation:Hub
 {
     private readonly IRequestService requestService;
     private readonly IUserService userService;
-    private readonly Dictionary<string, string> UsersConnecteds = new Dictionary<string, string>();
+    private Dictionary<string, string> UsersConnecteds { get; set; } = new Dictionary<string, string>();
+   
 
     public HubSolicitation(IRequestService requestService, IUserService userService)
     {
         this.requestService = requestService;
         this.userService = userService;
+    }
+    public Dictionary<string, string> getUsersConnecteds(){
+        return UsersConnecteds;
     }
     public async Task sendingrequest(Guid receiver_id, Guid requester_id, StatusEnum status){
         RequestDto requestDto = new RequestDto();
