@@ -5,4 +5,5 @@ Design of a social network using technologies: C# and Vue.js and using the TDD t
 
 <h1>Database Modeling</h1>
 
-![mysq-2023-04-05_18-09](https://user-images.githubusercontent.com/101439440/230211998-b226c934-a6ae-486d-adda-6a9566df25e8.svg)
+
+![Untitled](https://github.com/Erick-Bueno/SocialMedia/assets/101439440/1f5d9612-34d5-4c3c-9504-32a3209c9541)
