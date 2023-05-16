@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mR6y8hFBGm1MZmKUQc/WTNrMjbGer1vfrmcu+eENn0E=",
+  "Hash": "KewAY+ISr+7ExZsJsGPzL+BFYNxdAlrrXIVO057k2sk=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "backend\\wwwroot",
       "Source": "backend",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\00a0eb29-dfb9-4674-a471-922e5f66a880caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\00a0eb29-dfb9-4674-a471-922e5f66a880caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/00a0eb29-dfb9-4674-a471-922e5f66a880caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\00a0eb29-dfb9-4674-a471-922e5f66a880caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\0441a3c4-4b2f-4853-8dc9-0af123629611caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\0441a3c4-4b2f-4853-8dc9-0af123629611caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/0441a3c4-4b2f-4853-8dc9-0af123629611caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\0441a3c4-4b2f-4853-8dc9-0af123629611caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\258d666f-8be8-40e9-934e-25fc7e03b7ddcaminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\258d666f-8be8-40e9-934e-25fc7e03b7ddcaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/258d666f-8be8-40e9-934e-25fc7e03b7ddcaminhao-de-entrega.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\258d666f-8be8-40e9-934e-25fc7e03b7ddcaminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\39685582-bd32-4947-9692-e0ec25510ee3caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\39685582-bd32-4947-9692-e0ec25510ee3caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/39685582-bd32-4947-9692-e0ec25510ee3caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\39685582-bd32-4947-9692-e0ec25510ee3caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\3c9dab6d-dbbc-44ba-b921-5297dcdd0ef0caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\3c9dab6d-dbbc-44ba-b921-5297dcdd0ef0caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/3c9dab6d-dbbc-44ba-b921-5297dcdd0ef0caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\3c9dab6d-dbbc-44ba-b921-5297dcdd0ef0caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\3e7eca82-bd84-4828-816b-cded6d4291b0caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\3e7eca82-bd84-4828-816b-cded6d4291b0caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/3e7eca82-bd84-4828-816b-cded6d4291b0caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\3e7eca82-bd84-4828-816b-cded6d4291b0caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\4475527b-ad70-4676-8fe6-609fb744b1bbcaminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\4475527b-ad70-4676-8fe6-609fb744b1bbcaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/4475527b-ad70-4676-8fe6-609fb744b1bbcaminhao-de-entrega.png",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\4475527b-ad70-4676-8fe6-609fb744b1bbcaminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\5511352c-a85f-4339-b803-9a52e22c6307caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\5511352c-a85f-4339-b803-9a52e22c6307caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/5511352c-a85f-4339-b803-9a52e22c6307caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\5511352c-a85f-4339-b803-9a52e22c6307caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\6c6cda9e-850f-43a6-bf8e-77ea2a443541caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\6c6cda9e-850f-43a6-bf8e-77ea2a443541caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/6c6cda9e-850f-43a6-bf8e-77ea2a443541caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\6c6cda9e-850f-43a6-bf8e-77ea2a443541caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\6f89517b-e826-430d-9970-a9cf1ddb5113caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\6f89517b-e826-430d-9970-a9cf1ddb5113caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/6f89517b-e826-430d-9970-a9cf1ddb5113caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\6f89517b-e826-430d-9970-a9cf1ddb5113caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\73a75e7b-0299-4905-a387-47c4ca66c6afcaminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\73a75e7b-0299-4905-a387-47c4ca66c6afcaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/73a75e7b-0299-4905-a387-47c4ca66c6afcaminhao-de-entrega.png",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\73a75e7b-0299-4905-a387-47c4ca66c6afcaminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\8366c83d-1d52-42cc-b786-eb6d37422dcfcaminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\887a4dfe-2a95-4596-a405-82e9a8e57cdacaminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\9e8b8840-1879-4338-b9f8-e74e0029a0e3caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9f6fc81e-9806-48fe-8f45-94a2e2dc4ce8caminhao-de-entrega.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\9f6fc81e-9806-48fe-8f45-94a2e2dc4ce8caminhao-de-entrega.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/9f6fc81e-9806-48fe-8f45-94a2e2dc4ce8caminhao-de-entrega.png",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\UsersProfileImages\\9f6fc81e-9806-48fe-8f45-94a2e2dc4ce8caminhao-de-entrega.png"
     },
     {
-      "Identity": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\teste.png",
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\UsersProfileImages\\teste.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
       "BasePath": "_content/backend",
       "RelativePath": "UsersProfileImages/teste.png",
       "AssetKind": "All",

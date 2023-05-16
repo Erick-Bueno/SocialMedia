@@ -15,7 +15,7 @@ namespace auth.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> login([FromBody] UserLoginDto loginDto)
+        public async Task<ActionResult<UserModel>> login([FromBody] UserLoginDto loginDto)
         {
             try
             {
@@ -28,6 +28,19 @@ namespace auth.Controllers
                 return BadRequest(responseError);
             }
            
+        }
+        [HttpPost]
+        public async Task<ActionResult<TokenModel>> refreshToken([FromBody] string jwt){
+            try
+            {
+                var refreshToken = await authService.RefreshToken(jwt);
+                return Ok(refreshToken);
+            }
+            catch (ValidationException ex)
+            {
+                 ResponseErrorAuth responseErrorAuth = new ResponseErrorAuth(400, ex.Message);
+                 return BadRequest(responseErrorAuth);
+            }
         }
     }
 }
