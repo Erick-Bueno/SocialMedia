@@ -1,5 +1,5 @@
 public interface IAuthService
 {
     public Task<ResponseRegister> login(UserLoginDto userData);
-    public Task<ResponseAuth> RefreshToken(string Jwt);
+    public Task<ResponseAuth> refreshToken(string Jwt);
 }

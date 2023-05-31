@@ -14,32 +14,35 @@ namespace auth.Controllers
             this.authService = authService;
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<UserModel>> login([FromBody] UserLoginDto loginDto)
         {
             try
             {
-            var login = await authService.login(loginDto);
-            return Ok(login);
+                var login = await authService.login(loginDto);
+                return Ok(login);
             }
             catch (ValidationException ex)
             {
-                ReponseErrorRegister responseError = new ReponseErrorRegister(400, ex.Message);
+                var responseError = new Response<UserModel>(400, ex.Message);
                 return BadRequest(responseError);
             }
-           
+
         }
         [HttpPost]
-        public async Task<ActionResult<TokenModel>> refreshToken([FromBody] string jwt){
+        [Route("/refresh")]
+        public async Task<ActionResult<TokenModel>> refreshToken([FromBody] jwtDto jwt)
+        {
             try
             {
-                var refreshToken = await authService.RefreshToken(jwt);
+
+                var refreshToken = await authService.refreshToken(jwt.jwt);
                 return Ok(refreshToken);
             }
             catch (ValidationException ex)
             {
-                 ResponseErrorAuth responseErrorAuth = new ResponseErrorAuth(400, ex.Message);
-                 return BadRequest(responseErrorAuth);
+                var responseErrorAuth = new Response<TokenModel>(400, ex.Message);
+                return BadRequest(responseErrorAuth);
             }
         }
     }

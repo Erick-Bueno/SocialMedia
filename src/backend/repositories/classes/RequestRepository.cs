@@ -14,9 +14,9 @@ public class RequestRepository : IRequestRepository
         return request;
     }
 
-    public  RequestsModel FindRequest(Guid Receiver_id, Guid Requester_id)
+    public  RequestsModel findRequest(Guid Receiver_id, Guid Requester_id)
     {
-        var FindedRequestOrNot = _context.Requests.Where(r => r.Receiver_id == Receiver_id && r.Requester_id == Requester_id).FirstOrDefault();
-        return FindedRequestOrNot;
+        var findedRequestOrNot = _context.Requests.Where(r => r.receiverId == Receiver_id && r.requesterId == Requester_id).FirstOrDefault();
+        return findedRequestOrNot;
     }
 }

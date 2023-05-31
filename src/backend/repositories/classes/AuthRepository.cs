@@ -7,22 +7,22 @@ public class AuthRepository : IAuthRepository
         _context = context;
     }
 
-    public async Task<TokenModel> FindUserEmailWithToken(string jwt)
+    public async Task<TokenModel> findUserEmailWithToken(string jwt)
     {
         var tokenRegister =  _context.Token.Where(tk => tk.jwt == jwt).FirstOrDefault();
         return tokenRegister;
     }
 
-    public TokenModel LoggedInBeffore(string email)
+    public TokenModel loggedInBeffore(string email)
     {
-        var findUserLogged = _context.Token.Where(tk => tk.Email == email).FirstOrDefault();
+        var findUserLogged = _context.Token.Where(tk => tk.email == email).FirstOrDefault();
         return findUserLogged;
     }
 
-    public UserModel SearchingForEmail(UserLoginDto loginData)
+    public UserModel searchingForEmail(UserLoginDto loginData)
     {
-        var FindEmail = _context.Users.Where(u => u.Email == loginData.Email).FirstOrDefault();
-        return FindEmail;
+        var findEmail = _context.Users.Where(u => u.email == loginData.email).FirstOrDefault();
+        return findEmail;
     }
 
    

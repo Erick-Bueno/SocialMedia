@@ -1,6 +1,6 @@
 public interface IAuthRepository
 {
-    public UserModel SearchingForEmail(UserLoginDto loginData);
-    public TokenModel LoggedInBeffore(string email);
-    public Task<TokenModel> FindUserEmailWithToken(string jwt);
+    public UserModel searchingForEmail(UserLoginDto loginData);
+    public TokenModel loggedInBeffore(string email);
+    public Task<TokenModel> findUserEmailWithToken(string jwt);
 }

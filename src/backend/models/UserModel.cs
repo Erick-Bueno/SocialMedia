@@ -4,11 +4,11 @@ public class UserModel
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid id { get; set; }
-    public string UserName{get;set;}
-    public string Telephone{get;set;}
-    public string Email{get;set;}
-    public string Password{get;set;}
-    public string? User_Photo{get; set;}
+    public string userName{get;set;}
+    public string telephone{get;set;}
+    public string email{get;set;}
+    public string password{get;set;}
+    public string? userPhoto{get; set;}
 
     public List<PostModel> posts{get; set;}
     public List<LikesModel> userlikes {get;set;}

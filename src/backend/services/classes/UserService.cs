@@ -16,67 +16,85 @@ public class UserService : IUserService
         this.jwt = jwt;
     }
 
-      async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
+    async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
     {
-        var userExists = userRepository.user_registred(userDto.Email);
-        if(userExists != null){
+        var userExists = userRepository.userRegistred(userDto.email);
+        var fileUrlPhoto = "";
+        if (userExists != null)
+        {
             throw new ValidationException("Email já cadastrado");
         }
-        if(imagefileuser.ContentType != "image/jpeg" && imagefileuser.ContentType != "image/png"){
-            throw new ValidationException("Informe uma imagem valida");
+        if (imagefileuser != null)
+        {
+            if (imagefileuser.ContentType != "image/jpeg" && imagefileuser.ContentType != "image/png")
+            {
+                throw new ValidationException("Informe uma imagem valida");
+            }
+            fileUrlPhoto = Guid.NewGuid() + imagefileuser.FileName;
+            saveUserPhoto(fileUrlPhoto, imagefileuser);
         }
-        var fileurlphoto = Guid.NewGuid() + imagefileuser.FileName;
-        SaveUserPhoto(fileurlphoto, imagefileuser);
-        var userModel = convertUserDtoToUserModel(userDto, fileurlphoto);
-        var encryptedPassword = BCrypt.Net.BCrypt.HashPassword(userModel.Password);
-        userModel.Password = encryptedPassword;
+        
+        
+        var userModel = convertUserDtoToUserModel(userDto, fileUrlPhoto);
+        var encryptedPassword = BCrypt.Net.BCrypt.HashPassword(userModel.password);
+        userModel.password = encryptedPassword;
 
-        var UserRegistered = await userRepository.Register(userModel);
+        var userRegistered = await userRepository.register(userModel);
 
         var token = jwt.generateJwt(userModel);
-    
+
         TokenModel tokenmodel = new TokenModel();
-        tokenmodel.Email = userModel.Email;
+        tokenmodel.email = userModel.email;
         tokenmodel.jwt = token;
 
-        var addtoken = await tokenRepository.addUserToken(tokenmodel);
-      
-        
-        ResponseRegister rp = new ResponseRegister( 200,"usuario cadastrado",UserRegistered.id, token);
+        var addToken = await tokenRepository.addUserToken(tokenmodel);
+
+
+        ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", userRegistered.id, token);
         //adicionar imagem em pasta na web e criar se n existir
         return rp;
-        
 
 
-    } 
-    public UserModel convertUserDtoToUserModel(UserRegisterDto userDto, string url){
+
+    }
+    public UserModel convertUserDtoToUserModel(UserRegisterDto userDto, string url)
+    {
         UserModel modelUser = new UserModel();
- 
-        modelUser.UserName = userDto.UserName;
-        modelUser.Email = userDto.Email;
-        modelUser.Password = userDto.Password;
-        modelUser.Telephone = userDto.Telephone;
-        modelUser.User_Photo = url;
+
+        modelUser.userName = userDto.userName;
+        modelUser.email = userDto.email;
+        modelUser.password = userDto.password;
+        modelUser.telephone = userDto.telephone;
+        modelUser.userPhoto = url;
 
         return modelUser;
 
     }
-     public async void SaveUserPhoto(string img, IFormFile imguser){
+    public async void saveUserPhoto(string img, IFormFile imguser)
+    {
         //verifica se o direito existe, e adiciona a foto
-        if(!Directory.Exists(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img)){
+        if (!Directory.Exists(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img))
+        {
             Directory.CreateDirectory(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\");
         }
         //criando o arquivo no diretorio especificado
-        var stream = System.IO.File.Create(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img);
+        var stream = File.Create(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img);
 
         //copiar o conteudo do arquivo e salva no aqrquivo criado
         await imguser.CopyToAsync(stream);
 
-     }
-
-    public async Task<UserModel> FindUserRequester(Guid id)
-    {
-       var UserData = await userRepository.FindUserRequester(id);
-       return UserData;
     }
+
+    public async Task<UserModel> findUser(Guid id)
+    {
+        var userData = await userRepository.findUser(id);
+        return userData;
+    }
+    public async Task<int> findFriends(Guid id)
+    {
+        var countFriends = userRepository.findFriends(id);
+        return countFriends;
+    }
+
+
 }

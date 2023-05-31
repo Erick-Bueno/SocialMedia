@@ -14,21 +14,21 @@ public class AuthRepositoryTest
        .UseInMemoryDatabase(databaseName:"teste")
        .Options;
 
-        var AppDbContextMock = new Mock<AppDbContext>(options);
+        var appDbContextMock = new Mock<AppDbContext>(options);
         
-            UserModel userModeltest = new UserModel();
-            userModeltest.id = Guid.NewGuid();
-            userModeltest.Email = "erickjb93@gmail.com";
-            userModeltest.Password = "Sirlei231";
-            userModeltest.UserName = "erick";
-            userModeltest.Telephone ="77799591703";
-            userModeltest.User_Photo =  "llll";
+        UserModel userModeltest = new UserModel();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.email = "erickjb93@gmail.com";
+        userModeltest.password = "Sirlei231";
+        userModeltest.userName = "erick";
+        userModeltest.telephone ="77799591703";
+        userModeltest.userPhoto =  "llll";
 
-            UserLoginDto loginData = new UserLoginDto();
-            loginData.Email = userModeltest.Email;
-            loginData.Senha = userModeltest.Password;
+        UserLoginDto loginData = new UserLoginDto();
+        loginData.email = userModeltest.email;
+        loginData.senha = userModeltest.password;
 
-            var users = new List<UserModel>{userModeltest}.AsQueryable();
+        var users = new List<UserModel>{userModeltest}.AsQueryable();
 
         var dbsetusersmock = new Mock<DbSet<UserModel>>();
         dbsetusersmock.As<IQueryable<UserModel>>().Setup(x => x.Provider).Returns(users.AsQueryable().Provider);
@@ -36,11 +36,11 @@ public class AuthRepositoryTest
         dbsetusersmock.As<IQueryable<UserModel>>().Setup(x => x.ElementType).Returns(users.AsQueryable().ElementType);
         dbsetusersmock.As<IQueryable<UserModel>>().Setup(x => x.GetEnumerator()).Returns(users.AsQueryable().GetEnumerator());
 
-        AppDbContextMock.Setup(db => db.Users).Returns(dbsetusersmock.Object);
-        var AuthRepository = new AuthRepository(AppDbContextMock.Object);
-        var result =  AuthRepository.SearchingForEmail(loginData);
+        appDbContextMock.Setup(db => db.Users).Returns(dbsetusersmock.Object);
+        var authRepository = new AuthRepository(appDbContextMock.Object);
+        var result =  authRepository.searchingForEmail(loginData);
 
-         Assert.Equal(userModeltest, result);
+        Assert.Equal(userModeltest, result);
 
     }    
 
@@ -51,10 +51,10 @@ public class AuthRepositoryTest
         .UseInMemoryDatabase(databaseName:"teste")
         .Options;
         TokenModel token = new TokenModel();
-        token.Email = "erickjb93@gmail.com";
+        token.email = "erickjb93@gmail.com";
         token.id = Guid.NewGuid();
         token.jwt = "asdasdasdasd";
-        var AppDbContextMock = new Mock<AppDbContext>(options);
+        var appDbContextMock = new Mock<AppDbContext>(options);
         var tokens = new List<TokenModel>{token}.AsQueryable();
 
       
@@ -65,13 +65,13 @@ public class AuthRepositoryTest
         dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.ElementType).Returns(tokens.ElementType);
         dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.GetEnumerator()).Returns(tokens.GetEnumerator());
 
-        AppDbContextMock.Setup(db => db.Token).Returns(dbsetMockToken.Object);
+        appDbContextMock.Setup(db => db.Token).Returns(dbsetMockToken.Object);
 
      
        
         
-        var AuthRepository = new AuthRepository(AppDbContextMock.Object);
-        var result = AuthRepository.LoggedInBeffore(token.Email);
+        var authRepository = new AuthRepository(appDbContextMock.Object);
+        var result = authRepository.loggedInBeffore(token.email);
 
         Assert.Equal(token, result);
     }
@@ -80,36 +80,36 @@ public class AuthRepositoryTest
     {
         var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
 
-        var AppDbContextMock = new Mock<AppDbContext>(options);
+        var appDbContextMock = new Mock<AppDbContext>(options);
 
-        var dbsetMockToken = new Mock<DbSet<TokenModel>>();
+        var dbSetMockToken = new Mock<DbSet<TokenModel>>();
         UserModel userModeltest = new UserModel();
         userModeltest.id = Guid.NewGuid();
-        userModeltest.Email = "erickjb93@gmail.com";
-        userModeltest.Password = "Sirlei231";
-        userModeltest.UserName = "erick";
-        userModeltest.Telephone ="77799591703";
-        userModeltest.User_Photo =  "llll";
+        userModeltest.email = "erickjb93@gmail.com";
+        userModeltest.password = "Sirlei231";
+        userModeltest.userName = "erick";
+        userModeltest.telephone ="77799591703";
+        userModeltest.userPhoto =  "llll";
 
         TokenModel token = new TokenModel();
         Jwt jwt = new Jwt();
-        token.Email = "erickjb93@gmail.com";
+        token.email = "erickjb93@gmail.com";
         token.id = Guid.NewGuid();
 
         token.jwt = jwt.generateJwt(userModeltest);
 
         var tokens = new List<TokenModel>{token}.AsQueryable();
 
-        dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Provider).Returns(tokens.Provider);
-        dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Expression).Returns(tokens.Expression);
-        dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.ElementType).Returns(tokens.ElementType);
-        dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.GetEnumerator()).Returns(tokens.GetEnumerator());
+        dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Provider).Returns(tokens.Provider);
+        dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Expression).Returns(tokens.Expression);
+        dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.ElementType).Returns(tokens.ElementType);
+        dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.GetEnumerator()).Returns(tokens.GetEnumerator());
 
-        AppDbContextMock.Setup(db => db.Token).Returns(dbsetMockToken.Object);
+        appDbContextMock.Setup(db => db.Token).Returns(dbSetMockToken.Object);
 
-        var AuthRepository = new AuthRepository(AppDbContextMock.Object);
+        var authRepository = new AuthRepository(appDbContextMock.Object);
 
-        var result = await AuthRepository.FindUserEmailWithToken(token.jwt);
+        var result = await authRepository.findUserEmailWithToken(token.jwt);
 
         Assert.Equal(result,token);
 
@@ -120,26 +120,26 @@ public class AuthRepositoryTest
     public async void must_find_no_email()
     {
        var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName:"teste").Options;
-       var AppDbContextMock = new Mock<AppDbContext>(options);
-       var dbsetMockToken = new Mock<DbSet<TokenModel>>();
+       var appDbContextMock = new Mock<AppDbContext>(options);
+       var dbSetMockToken = new Mock<DbSet<TokenModel>>();
        
        var tokens = new List<TokenModel>(){}.AsQueryable();
 
-       dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Provider).Returns(tokens.Provider);
-       dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Expression).Returns(tokens.Expression);
-       dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.ElementType).Returns(tokens.ElementType);
-       dbsetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.GetEnumerator()).Returns(tokens.GetEnumerator());
+       dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Provider).Returns(tokens.Provider);
+       dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.Expression).Returns(tokens.Expression);
+       dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.ElementType).Returns(tokens.ElementType);
+       dbSetMockToken.As<IQueryable<TokenModel>>().Setup(x => x.GetEnumerator()).Returns(tokens.GetEnumerator());
 
-       AppDbContextMock.Setup(db => db.Token).Returns(dbsetMockToken.Object);
+       appDbContextMock.Setup(db => db.Token).Returns(dbSetMockToken.Object);
 
-       var AuthRepository = new AuthRepository(AppDbContextMock.Object);
+       var AuthRepository = new AuthRepository(appDbContextMock.Object);
 
         TokenModel token = new TokenModel();
         Jwt jwt = new Jwt();
-        token.Email = "erickjb93@gmail.com";
+        token.email = "erickjb93@gmail.com";
         token.id = Guid.NewGuid();
 
-       var result = await AuthRepository.FindUserEmailWithToken(token.jwt);
+       var result = await AuthRepository.findUserEmailWithToken(token.jwt);
 
        Assert.Equal(result,null);
 

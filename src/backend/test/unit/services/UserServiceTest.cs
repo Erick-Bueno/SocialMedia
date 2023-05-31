@@ -6,72 +6,73 @@ using Xunit;
 public class UserServiceTest
 {
     public UserRegisterDto userDto { get; set; }
-    public UserModel userModeltest {get; set;}
-    public UserServiceTest(){
+    public UserModel userModelTest { get; set; }
+    public UserServiceTest()
+    {
 
-            userDto =  new UserRegisterDto();
-            userModeltest = new UserModel();
-           
+        userDto = new UserRegisterDto();
+        userModelTest = new UserModel();
 
-          
-            userDto.Email = "erickjb93@gmail.com";
-            userDto.Password = "Sirlei231";
-            userDto.UserName = "erick";
-            userDto.Telephone ="77799591703";
-            userDto.User_Photo =  "llll";
-            userDto.userimagefile = null;
 
-            var encrypted_password  = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-            userModeltest.id = Guid.NewGuid();
-            userModeltest.Email = userDto.Email;
-            userModeltest.Password = encrypted_password;
-            userModeltest.UserName = userDto.UserName;
-            userModeltest.Telephone = userDto.Telephone;
-            userModeltest.User_Photo =  userDto.User_Photo;
+
+        userDto.email = "erickjb93@gmail.com";
+        userDto.password = "Sirlei231";
+        userDto.userName = "erick";
+        userDto.telephone = "77799591703";
+        userDto.userPhoto = "llll";
+        userDto.userImageFile = null;
+
+        var encrypted_password = BCrypt.Net.BCrypt.HashPassword(userDto.password);
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = userDto.email;
+        userModelTest.password = encrypted_password;
+        userModelTest.userName = userDto.userName;
+        userModelTest.telephone = userDto.telephone;
+        userModelTest.userPhoto = userDto.userPhoto;
     }
     [Fact]
     async public void register_user_service_test()
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
-        var UserRepositoryMock = new Mock<IUserRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
         var tokenRepository = new Mock<ITokenRepository>();
         var jwt = new Mock<Ijwt>();
-            
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
+
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
         //simulated formfile
-        var filephotomock = new Mock<IFormFile>();
+        var filePhotoMock = new Mock<IFormFile>();
         var memoryStream = new MemoryStream();
         var writeFile = new StreamWriter(memoryStream);
         writeFile.Write("arquivo de teste");
         writeFile.Flush();
         memoryStream.Position = 0;
         var filePhoto = "imagem.jpg";
-        userDto.userimagefile = filephotomock.Object;
-        filephotomock.Setup(f => f.FileName).Returns(filePhoto);
-        filephotomock.Setup(f => f.ContentType).Returns("image/jpeg");
-      
-        
-
-        UserRepositoryMock
-        .Setup(ur => ur.Register(It.IsAny<UserModel>()))
-        .ReturnsAsync(userModeltest);
+        userDto.userImageFile = filePhotoMock.Object;
+        filePhotoMock.Setup(f => f.FileName).Returns(filePhoto);
+        filePhotoMock.Setup(f => f.ContentType).Returns("image/jpeg");
 
 
 
-        var result  = await UserService.register(userDto, userDto.userimagefile);
+        userRepositoryMock
+        .Setup(ur => ur.register(It.IsAny<UserModel>()))
+        .ReturnsAsync(userModelTest);
 
-   
-        
 
-        
+
+        var result = await userService.register(userDto, userDto.userImageFile);
+
+
+
+
+
         Assert.IsType<ResponseRegister>(result);
     }
-     [Fact]
+    [Fact]
     public void convert_userDto_to_userModel_test()
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
-        var filephotomock = new Mock<IFormFile>();
+        var filePhotoMock = new Mock<IFormFile>();
         var memoryStream = new MemoryStream();
         var writeFile = new StreamWriter(memoryStream);
         writeFile.Write("arquivo de teste");
@@ -79,22 +80,22 @@ public class UserServiceTest
         memoryStream.Position = 0;
         var filePhoto = "imagem.jpg";
         var jwt = new Mock<Ijwt>();
-        userDto.userimagefile = filephotomock.Object;
-        filephotomock.Setup(f => f.FileName).Returns(filePhoto);
-        filephotomock.Setup(f => f.ContentType).Returns("image/jpeg");
+        userDto.userImageFile = filePhotoMock.Object;
+        filePhotoMock.Setup(f => f.FileName).Returns(filePhoto);
+        filePhotoMock.Setup(f => f.ContentType).Returns("image/jpeg");
 
-        var urlphoto = Guid.NewGuid() + userDto.userimagefile.FileName;
+        var urlphoto = Guid.NewGuid() + userDto.userImageFile.FileName;
         var tokenRepository = new Mock<ITokenRepository>();
         var UserRepositoryMock = new Mock<IUserRepository>();
-        UserRepositoryMock.Setup(ur => ur.Register(userModeltest)).ReturnsAsync(userModeltest);
+        UserRepositoryMock.Setup(ur => ur.register(userModelTest)).ReturnsAsync(userModelTest);
 
-        var UserService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
+        var userService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
-        var result = UserService.convertUserDtoToUserModel(userDto, urlphoto);
+        var result = userService.convertUserDtoToUserModel(userDto, urlphoto);
 
         Assert.IsType<UserModel>(result);
 
-    } 
+    }
     [Fact]
     public void image_profile_user_save_test()
     {
@@ -103,25 +104,25 @@ public class UserServiceTest
         var tokenRepository = new Mock<ITokenRepository>();
         var nomeimg = "teste.png";
         var IFormFileMock = new Mock<IFormFile>();
-        var StreamMock = new MemoryStream();
+        var streamMock = new MemoryStream();
         IFormFileMock.Setup(ff => ff.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
-     
-        var jwt = new Mock<Ijwt>();
-   
-        var userRepositoryMock = new Mock<IUserRepository>();
-        var userService = new UserService(userRepositoryMock.Object,IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
-        userService.SaveUserPhoto(nomeimg, IFormFileMock.Object);
-        
+        var jwt = new Mock<Ijwt>();
+
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
+
+        userService.saveUserPhoto(nomeimg, IFormFileMock.Object);
+
         Assert.True(Directory.Exists("C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot"));
-        
-        
+
+
     }
-     [Fact]
-   async public void Verify_fileContentType_is_jpg_or_png_Exception_test()
+    [Fact]
+    async public void Verify_fileContentType_is_jpg_or_png_Exception_test()
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
-        var filephotomock = new Mock<IFormFile>();
+        var filePhotoMock = new Mock<IFormFile>();
 
         var tokenRepository = new Mock<ITokenRepository>();
         var memoryStream = new MemoryStream();
@@ -129,65 +130,124 @@ public class UserServiceTest
         writeFile.Write("arquivo de teste");
         writeFile.Flush();
         memoryStream.Position = 0;
-       
-        userDto.userimagefile = filephotomock.Object;
-        
-        filephotomock.Setup(f => f.ContentType).Returns("image/csv");  
 
-        var UserMockRepository = new Mock<IUserRepository>();
+        userDto.userImageFile = filePhotoMock.Object;
 
-        UserMockRepository.Setup(um => um.Register(userModeltest)).ReturnsAsync(userModeltest);
+        filePhotoMock.Setup(f => f.ContentType).Returns("image/csv");
+
+        var userMockRepository = new Mock<IUserRepository>();
+
+        userMockRepository.Setup(um => um.register(userModelTest)).ReturnsAsync(userModelTest);
         var jwt = new Mock<Ijwt>();
-        var UserService = new UserService(UserMockRepository.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
+        var userService = new UserService(userMockRepository.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
-        var result =  UserService.register(userDto, userDto.userimagefile);
+        var result = userService.register(userDto, userDto.userImageFile);
 
         await Assert.ThrowsAsync<ValidationException>(() => result);
 
-    } 
+    }
     [Fact]
-   async  public void User_registred_true_Exception_test()
+    async public void User_registred_true_Exception_test()
     {
-        var filephotomock = new Mock<IFormFile>();
+        var filePhotoMock = new Mock<IFormFile>();
         var memoryStream = new MemoryStream();
         var writeFile = new StreamWriter(memoryStream);
         writeFile.Write("arquivo de teste");
         writeFile.Flush();
         memoryStream.Position = 0;
-        userDto.userimagefile = filephotomock.Object;
+        userDto.userImageFile = filePhotoMock.Object;
         var jwt = new Mock<Ijwt>();
         var tokenRepository = new Mock<ITokenRepository>();
         var userRepositoryMock = new Mock<IUserRepository>();
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
-        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object,tokenRepository.Object, jwt.Object);
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
-        userRepositoryMock.Setup(ur => ur.user_registred(userDto.Email)).Returns(userModeltest);
-     
-        var result =  userService.register(userDto, userDto.userimagefile );
+        userRepositoryMock.Setup(ur => ur.userRegistred(userDto.email)).Returns(userModelTest);
 
-       await Assert.ThrowsAsync<ValidationException>(() => result);
+        var result = userService.register(userDto, userDto.userImageFile);
+
+        await Assert.ThrowsAsync<ValidationException>(() => result);
     }
     [Fact]
     public async void find_user_requester_test()
     {
-        var UserRepositoryMock = new Mock<IUserRepository>();
-        UserModel userModeltest = new UserModel();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModelTest = new UserModel();
         var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
         var tokenRepositoryMock = new Mock<ITokenRepository>();
         var jwtmock = new Mock<Ijwt>();
-        userModeltest.id = Guid.NewGuid();
-        userModeltest.Email = "erickjb93@gmail.com";
-        userModeltest.Password = "Sirlei231";
-        userModeltest.UserName = "erick";
-        userModeltest.Telephone ="77799591703";
-        userModeltest.User_Photo =  "llll";
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
 
-        UserRepositoryMock.Setup(ur => ur.FindUserRequester(userModeltest.id)).ReturnsAsync(userModeltest);
+        userRepositoryMock.Setup(ur => ur.findUser(userModelTest.id)).ReturnsAsync(userModelTest);
 
-        var userService = new UserService(UserRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object );
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object);
 
-        var result = await userService.FindUserRequester(userModeltest.id);
+        var result = await userService.findUser(userModelTest.id);
 
-        Assert.Equal(result, userModeltest);
-    }    
+        Assert.Equal(result, userModelTest);
+    }
+    [Fact]
+    public async void should_to_find_the_quantity_of_users_friends()
+    {
+        var userRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModelTest = new UserModel();
+        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
+        var tokenRepositoryMock = new Mock<ITokenRepository>();
+        var jwtmock = new Mock<Ijwt>();
+
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object);
+
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+
+        userRepositoryMock.Setup(ur => ur.findFriends( userModelTest.id)).Returns(1);
+
+        var result = await userService.findFriends(userModelTest.id);
+
+        Assert.Equal(result, 1);
+    }
+    [Fact]
+    public async void should_to_add_user_no_profile_picture()
+    {
+        var userRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModelTest = new UserModel();
+        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
+        var tokenRepositoryMock = new Mock<ITokenRepository>();
+        var jwtmock = new Mock<Ijwt>();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+    
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object);
+         userRepositoryMock
+        .Setup(ur => ur.register(It.IsAny<UserModel>()))
+        .ReturnsAsync(userModelTest);
+        var token = "token";
+        jwtmock.Setup(jwt=> jwt.generateJwt(It.IsAny<UserModel>())).Returns(token);
+        ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", userModelTest.id, token);
+        var result = await userService.register(userDto, null);
+
+        Assert.IsType<ResponseRegister>(result);
+        Assert.Equal(result.Jwt, rp.Jwt);
+        Assert.Equal(result.Id, rp.Id);
+        Assert.Equal(result.Status, rp.Status);
+        Assert.Equal(result.Message, rp.Message);
+       
+
+
+
+    }
 }

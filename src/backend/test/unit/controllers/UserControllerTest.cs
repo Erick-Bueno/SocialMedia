@@ -7,16 +7,13 @@ public class UserControllerTest
 {
     public UserRegisterDto userDto { get; set; }
     public UserControllerTest(){
-            userDto =  new UserRegisterDto();
+        userDto =  new UserRegisterDto();
             
-           
-
-          
-            userDto.Email = "erickjb93@gmail.com";
-            userDto.Password = "Sirlei231";
-            userDto.UserName = "erick";
-            userDto.Telephone ="77799591703";
-            userDto.User_Photo =  "llll";
+        userDto.email = "erickjb93@gmail.com";
+        userDto.password = "Sirlei231";
+        userDto.userName = "erick";
+        userDto.telephone ="77799591703";
+        userDto.userPhoto =  "llll";
             
         
     }
@@ -30,38 +27,66 @@ public class UserControllerTest
         writeFile.Flush();
         memoryStream.Position = 0;
         var filePhoto = "imagem.jpg";
-        userDto.userimagefile = filephotomock.Object;
-        var UserServiceMock = new Mock<IUserService>();
+        userDto.userImageFile = filephotomock.Object;
+        var userServiceMock = new Mock<IUserService>();
 
         
 
-        var userController = new User.Controllers.User(UserServiceMock.Object);
+        var userController = new UserController(userServiceMock.Object);
 
-         ResponseRegister ResponseTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(), "testejwt");
+        ResponseRegister responseTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(), "testejwt");
 
-        UserServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(ResponseTest);
+        userServiceMock.Setup(us => us.register(userDto,userDto.userImageFile)).ReturnsAsync(responseTest);
 
-        var result = await userController.RegisterUser(userDto,userDto.userimagefile);
+        var result = await userController.registerUser(userDto,userDto.userImageFile);
     
 
         Assert.IsType<OkObjectResult>(result.Result);
     }
      [Fact]
-    async public void should_to_check_the_content_in_okobjectresult_returned_in_register()
+    async public void should_to_return_a_response_with_user_authentication_data()
     {
         var userServiceMock = new Mock<IUserService>();
 
         
-        var UserControllerTest = new User.Controllers.User(userServiceMock.Object);
+        var userControllerTest = new UserController(userServiceMock.Object);
 
         ResponseRegister responseRegisterTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(),"testejwt");
 
-        userServiceMock.Setup(us => us.register(userDto,userDto.userimagefile)).ReturnsAsync(responseRegisterTest);
+        userServiceMock.Setup(us => us.register(userDto,userDto.userImageFile)).ReturnsAsync(responseRegisterTest);
 
-        var result = await UserControllerTest.RegisterUser(userDto,userDto.userimagefile);
+        var result = await userControllerTest.registerUser(userDto,userDto.userImageFile);
 
-        var OkObjectResult = Assert.IsType<OkObjectResult>(result.Result);
+        var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
       
-        Assert.IsType<ResponseRegister>(OkObjectResult.Value);
+        Assert.Equal(okObjectResult.Value, responseRegisterTest);
     } 
+    [Fact]
+    public async void should_to_return_a_response_with_user_data ()
+    {
+        var userServiceMock = new Mock<IUserService>();
+        var UserControllerTest = new UserController(userServiceMock.Object);
+        var userModeltest = new UserModel();
+        userModeltest.id = Guid.NewGuid();
+        userModeltest.email = "erickjb93@gmail.com";
+        userModeltest.password = "Sirlei231";
+        userModeltest.userName = "erick";
+        userModeltest.telephone = "77799591703";
+        userModeltest.userPhoto = "llll";
+
+        userServiceMock.Setup(us => us.findUser(userModeltest.id)).ReturnsAsync(userModeltest);
+
+        var result = await UserControllerTest.findUser(userModeltest.id);
+
+        var content = Assert.IsType<OkObjectResult>(result.Result).Value;
+
+         var responseFindedUser = new ResponseUserFinded(200, "Usuario encontrado", userModeltest.userName, userModeltest.userPhoto, 0);
+        
+        Assert.Equal(200 ,responseFindedUser.Status);
+        Assert.Equal("Usuario encontrado" ,responseFindedUser.Message);
+        Assert.Equal("erick" ,responseFindedUser.Name);
+        Assert.Equal("llll" ,responseFindedUser.Profileimage);
+        Assert.Equal(0 ,responseFindedUser.Friendsquantity);
+       
+    }
 }

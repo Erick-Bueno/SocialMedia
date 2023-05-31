@@ -1,7 +1,7 @@
 public class BcryptTest : IBcryptTest
 {
-    public bool verify(string password, string HashPassword)
+    public bool verify(string password, string hashPassword)
     {
-       return BCrypt.Net.BCrypt.Verify(password,HashPassword);
+       return BCrypt.Net.BCrypt.Verify(password,hashPassword);
     }
 }

@@ -1,6 +1,6 @@
 public interface IRequestService
 {
-    public RequestsModel ConverteToRequestModel(RequestDto requestDto);
+    public RequestsModel converteToRequestModel(RequestDto requestDto);
     public Task<bool> addRequest(RequestDto requestDto);
-    public RequestsModel FindRequest(Guid Receiver_id, Guid Requester_id);
+    public RequestsModel findRequest(Guid Receiver_id, Guid Requester_id);
 }

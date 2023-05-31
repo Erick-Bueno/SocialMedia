@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 
 public class UserRepository : IUserRepository
@@ -11,13 +12,14 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<UserModel> FindUserRequester(Guid id)
+
+    public async Task<UserModel> findUser(Guid id)
     {
         var findUser = await _context.Users.FindAsync(id);
         return findUser;
     }
 
-    async public Task<UserModel> Register(UserModel user)
+    async public Task<UserModel> register(UserModel user)
     {
         try
         {
@@ -36,9 +38,14 @@ public class UserRepository : IUserRepository
       
     }
 
-    public UserModel user_registred(string Email)
+    public UserModel userRegistred(string Email)
     {
-        var UserRegistred = _context.Users.Where(u => u.Email == Email).FirstOrDefault();
-        return UserRegistred;
+        var userRegistred = _context.Users.Where(u => u.email == Email).FirstOrDefault();
+        return userRegistred;
+    }
+    public int findFriends(Guid id){
+        var listFriends = _context.Friends.Where(f=> f.userId == id || f.userId2 == id);
+        var countFriends = listFriends.Count();
+        return countFriends;
     }
 }

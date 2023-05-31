@@ -1,4 +1,4 @@
 public interface IBcryptTest
 {
-    public bool verify(string password, string HashPassword);
+    public bool verify(string password, string hashPassword);
 }

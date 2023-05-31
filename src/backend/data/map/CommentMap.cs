@@ -7,12 +7,12 @@ public class CommentMap : IEntityTypeConfiguration<CommentModel>
     {
         builder.HasKey(c => c.id);
         builder.Property(c => c.comment).IsRequired().HasMaxLength(600);
-    
+
         builder.HasOne(u => u.userModel)
             .WithMany(c => c.userComments)
-            .HasForeignKey(c=> c.User_id);
+            .HasForeignKey(c => c.userId);
         builder.HasOne(u => u.postModel)
             .WithMany(c => c.commentsPost)
-            .HasForeignKey(c => c.Posts_id);
+            .HasForeignKey(c => c.postId);
     }
 }

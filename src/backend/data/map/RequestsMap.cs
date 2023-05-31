@@ -9,9 +9,9 @@ public class RequestsMap : IEntityTypeConfiguration<RequestsModel>
         builder.Property(r => r.status).IsRequired();
         builder.HasOne(u => u.userModel)
             .WithMany(r => r.usersRequests)
-            .HasForeignKey(r=> r.Requester_id);
+            .HasForeignKey(r => r.requesterId);
         builder.HasOne(u => u.UserModel2)
-            .WithMany(r=>r.usersRequests2)
-            .HasForeignKey(r => r.Receiver_id);
+            .WithMany(r => r.usersRequests2)
+            .HasForeignKey(r => r.receiverId);
     }
 }

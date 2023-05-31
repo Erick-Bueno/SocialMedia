@@ -15,11 +15,10 @@ public class TokenRepository : ITokenRepository
        return token;
     }
 
-    public async Task<TokenModel> UpdateToken(TokenModel token, string jwt)
+    public async Task<TokenModel> updateToken(TokenModel token, string jwt)
     {
       
         token.jwt = jwt;
-
         await _context.SaveChangesAsync();
         return token;
     }

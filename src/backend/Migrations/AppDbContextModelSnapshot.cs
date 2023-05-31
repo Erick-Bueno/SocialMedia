@@ -24,22 +24,22 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("Posts_id")
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid>("User_id")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("comment")
                         .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
+                    b.Property<Guid>("postId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("userId")
+                        .HasColumnType("char(36)");
+
                     b.HasKey("id");
 
-                    b.HasIndex("Posts_id");
+                    b.HasIndex("postId");
 
-                    b.HasIndex("User_id");
+                    b.HasIndex("userId");
 
                     b.ToTable("Comments");
                 });
@@ -50,17 +50,17 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("user_id")
+                    b.Property<Guid>("userId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("user_id_2")
+                    b.Property<Guid>("userId2")
                         .HasColumnType("char(36)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("user_id");
+                    b.HasIndex("userId");
 
-                    b.HasIndex("user_id_2");
+                    b.HasIndex("userId2");
 
                     b.ToTable("Friends");
                 });
@@ -71,17 +71,17 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("Posts_id")
+                    b.Property<Guid>("postId")
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("Users_id")
+                    b.Property<Guid>("userId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("Posts_id");
+                    b.HasIndex("postId");
 
-                    b.HasIndex("Users_id");
+                    b.HasIndex("userId");
 
                     b.ToTable("Likes");
                 });
@@ -97,12 +97,12 @@ namespace backend.Migrations
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
-                    b.Property<Guid>("posts_id")
+                    b.Property<Guid>("postId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("posts_id");
+                    b.HasIndex("postId");
 
                     b.ToTable("Posts_images");
                 });
@@ -113,27 +113,27 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("ContentPost")
+                    b.Property<string>("contentPost")
                         .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
-                    b.Property<DateTime>("DatePost")
+                    b.Property<DateTime>("datePost")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("Tot_likes")
+                    b.Property<int>("totalComments")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("User_id")
+                    b.Property<int>("totalLikes")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("userId")
                         .HasColumnType("char(36)");
-
-                    b.Property<int>("tot_comments")
-                        .HasColumnType("int");
 
                     b.HasKey("id");
 
-                    b.HasIndex("User_id");
+                    b.HasIndex("userId");
 
                     b.ToTable("Posts");
                 });
@@ -144,14 +144,14 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid>("Receiver_id")
-                        .HasColumnType("char(36)");
-
                     b.Property<DateTime>("RequestDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("Requester_id")
+                    b.Property<Guid>("receiverId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("requesterId")
                         .HasColumnType("char(36)");
 
                     b.Property<int>("status")
@@ -159,9 +159,9 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("Receiver_id");
+                    b.HasIndex("receiverId");
 
-                    b.HasIndex("Requester_id");
+                    b.HasIndex("requesterId");
 
                     b.ToTable("Requests");
                 });
@@ -172,7 +172,7 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
@@ -193,30 +193,32 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("password")
                         .IsRequired()
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
-                    b.Property<string>("Telephone")
+                    b.Property<string>("telephone")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("userName")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("User_Photo")
+                    b.Property<string>("userPhoto")
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("email");
 
                     b.ToTable("Users");
                 });
@@ -225,13 +227,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("PostModel", "postModel")
                         .WithMany("commentsPost")
-                        .HasForeignKey("Posts_id")
+                        .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UserModel", "userModel")
                         .WithMany("userComments")
-                        .HasForeignKey("User_id")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -244,13 +246,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("UserModel", "userModel")
                         .WithMany("UsersFriends")
-                        .HasForeignKey("user_id")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UserModel", "userModel2")
                         .WithMany("UsersFriends2")
-                        .HasForeignKey("user_id_2")
+                        .HasForeignKey("userId2")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -263,13 +265,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("PostModel", "postModel")
                         .WithMany("postLikes")
-                        .HasForeignKey("Posts_id")
+                        .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UserModel", "userModel")
                         .WithMany("userlikes")
-                        .HasForeignKey("Users_id")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -282,7 +284,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("PostModel", "posts")
                         .WithMany("postsimages")
-                        .HasForeignKey("posts_id")
+                        .HasForeignKey("postId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -293,7 +295,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("UserModel", "user")
                         .WithMany("posts")
-                        .HasForeignKey("User_id")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -304,13 +306,13 @@ namespace backend.Migrations
                 {
                     b.HasOne("UserModel", "UserModel2")
                         .WithMany("usersRequests2")
-                        .HasForeignKey("Receiver_id")
+                        .HasForeignKey("receiverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UserModel", "userModel")
                         .WithMany("usersRequests")
-                        .HasForeignKey("Requester_id")
+                        .HasForeignKey("requesterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

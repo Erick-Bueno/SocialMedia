@@ -8,8 +8,8 @@ public class RequestsModel
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime RequestDate {get; set;} = DateTime.UtcNow;
 
-    public Guid Requester_id {get; set;}
-    public Guid Receiver_id{get; set;}
+    public Guid requesterId {get; set;}
+    public Guid receiverId {get; set;}
     
     public UserModel userModel {get; set;}
   

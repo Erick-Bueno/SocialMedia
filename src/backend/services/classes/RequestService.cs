@@ -9,28 +9,28 @@ public class RequestService : IRequestService
 
     public async Task<bool> addRequest(RequestDto requestDto)
     {
-        var requestExists = requestRepository.FindRequest(requestDto.Receiver_id, requestDto.Requester_id);
+        var requestExists = requestRepository.findRequest(requestDto.receiverId, requestDto.requesterId);
         if(requestExists != null){
            return false;
         }
-        var requestmodel = ConverteToRequestModel(requestDto);
-        var addRequest = await requestRepository.createRequest(requestmodel);
+        var requestModel = converteToRequestModel(requestDto);
+        var addRequest = await requestRepository.createRequest(requestModel);
         return true;
     }
 
-    public RequestsModel ConverteToRequestModel(RequestDto requestDto)
+    public RequestsModel converteToRequestModel(RequestDto requestDto)
     {
         RequestsModel requests = new RequestsModel();
-        requests.Receiver_id = requestDto.Receiver_id;
-        requests.Requester_id = requestDto.Requester_id;
+        requests.receiverId = requestDto.receiverId;
+        requests.requesterId = requestDto.requesterId;
         requests.status = requestDto.status;
 
         return requests;
     }
 
-    public  RequestsModel FindRequest(Guid Receiver_id, Guid Requester_id)
+    public  RequestsModel findRequest(Guid receiverId, Guid requesterId)
     {
-        var RequestData = requestRepository.FindRequest(Receiver_id, Requester_id);
-        return RequestData;
+        var requestData = requestRepository.findRequest(receiverId, requesterId);
+        return requestData;
     }
 }

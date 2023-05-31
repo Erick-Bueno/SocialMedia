@@ -5,5 +5,5 @@ public class TokenModel
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid id {get; set;}
     public string jwt {get; set;}
-    public string Email{get;set;}
+    public string email{get;set;}
 }

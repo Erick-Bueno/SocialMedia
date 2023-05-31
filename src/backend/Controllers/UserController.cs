@@ -7,37 +7,45 @@ namespace User.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class User : ControllerBase
+    public class UserController : ControllerBase
     {
         public IUserService userService { get; set; }
 
-        public User(IUserService userService)
+        public UserController(IUserService userService)
         {
             this.userService = userService;
-          
+
         }
 
         [HttpPost]
-        public async Task<ActionResult<UserModel>> RegisterUser([FromForm] UserRegisterDto user, IFormFile userimagefile)
+        public async Task<ActionResult<UserModel>> registerUser([FromForm] UserRegisterDto user, IFormFile? userimagefile)
         {
             try
             {
-                var user_registered = await userService.register(user, userimagefile);
-                return Ok(user_registered);
+                var userRegistered = await userService.register(user, userimagefile);
+                return Ok(userRegistered);
             }
             catch (ValidationException ex)
             {
-                 var error_user_registered = new ReponseErrorRegister(400, ex.Message);
-                 return BadRequest(error_user_registered);
-                
+                var errorUserRegistered = new Response<UserModel>(400, ex.Message);
+                return BadRequest(errorUserRegistered);
+
 
             }
-            catch(DbException ex)
+            catch (DbException ex)
             {
-                var error_user_registered = new ReponseErrorRegister(500, ex.Message);
-                return StatusCode(500, error_user_registered );
+                var errorUserRegistered = new Response<UserModel>(500, ex.Message);
+                return StatusCode(500, errorUserRegistered);
             }
-            
+
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserModel>> findUser([FromRoute] Guid id)
+        {
+            var userData = await userService.findUser(id);
+            var countFriends = await userService.findFriends(id);
+            var responseFindedUser = new ResponseUserFinded(200, "Usuario encontrado", userData.userName, userData.userPhoto, countFriends);
+            return Ok(responseFindedUser);
         }
     }
 }
