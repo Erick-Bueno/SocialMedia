@@ -1,5 +1,5 @@
 
-using Like.Controllers;
+using LikeController.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -12,7 +12,7 @@ public class LikeControllerTest
     {
         var LikeServiceMock = new Mock<ILikeService>();
 
-        var LikeController = new LikeController(LikeServiceMock.Object);
+        var LikeController = new Like(LikeServiceMock.Object);
 
         var LikeDto = new LikeDto();
         LikeDto.postId = Guid.NewGuid();
@@ -36,7 +36,7 @@ public class LikeControllerTest
     {
         var LikeServiceMock = new Mock<ILikeService>();
 
-        var LikeController = new LikeController(LikeServiceMock.Object);
+        var LikeController = new Like(LikeServiceMock.Object);
 
         var LikeDto = new LikeDto();
         LikeDto.postId = Guid.NewGuid();

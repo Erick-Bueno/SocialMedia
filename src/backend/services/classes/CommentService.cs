@@ -4,11 +4,13 @@ public class CommentService : ICommentService
 {
     private readonly ICommentRepository commentRepository;
     private readonly IPostRepository postRepository;
+    private readonly IUserRepository userRepository;
 
-    public CommentService(ICommentRepository commentRepository, IPostRepository postRepository)
+    public CommentService(ICommentRepository commentRepository, IPostRepository postRepository, IUserRepository userRepository)
     {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     public CommentModel convertCommentDtoToCommentModel(CommentDto comment)
@@ -24,12 +26,19 @@ public class CommentService : ICommentService
     public async Task<Response<CommentModel>> createComment(CommentDto comment)
     {
         var commentModel = convertCommentDtoToCommentModel(comment);
-        var newComment = await commentRepository.createComment(commentModel);
-        var responseCommentCreated = new Response<CommentModel>(200, "Comentario adicionado");
-        var findedPost = await postRepository.findPost(newComment.postId);
-        if(findedPost == null){
+        var findedPost = await postRepository.findPost(commentModel.postId);
+        if (findedPost == null)
+        {
             throw new ValidationException("Postagem não encontrada");
         }
+        var findedUser = await userRepository.findUser(commentModel.userId);
+        if(findedUser == null)
+        {
+            throw new ValidationException("Usuário não encontrada");
+        }
+        var newComment = await commentRepository.createComment(commentModel);
+        var responseCommentCreated = new Response<CommentModel>(200, "Comentario adicionado");
+
         await postRepository.updateTotalComments(findedPost);
         return responseCommentCreated;
     }

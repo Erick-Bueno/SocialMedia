@@ -23,19 +23,19 @@ public class UserRepository : IUserRepository
     {
         try
         {
-            
-                var registeredUser = await _context.Users.AddAsync(user);
-              
-                await _context.SaveChangesAsync();
-                return user;
+
+            var registeredUser = await _context.Users.AddAsync(user);
+
+            await _context.SaveChangesAsync();
+            return user;
         }
         catch (DbException ex)
         {
-                throw new ValidationException("Erro ao cadastrar um usuario");
+            throw new ValidationException("Erro ao cadastrar um usuario");
         }
-   
-   
-      
+
+
+
     }
 
     public UserModel userRegistred(string Email)
@@ -43,8 +43,9 @@ public class UserRepository : IUserRepository
         var userRegistred = _context.Users.Where(u => u.email == Email).FirstOrDefault();
         return userRegistred;
     }
-    public int findFriends(Guid id){
-        var listFriends = _context.Friends.Where(f=> f.userId == id || f.userId2 == id);
+    public int findFriends(Guid id)
+    {
+        var listFriends = _context.Friends.Where(f => f.userId == id || f.userId2 == id);
         var countFriends = listFriends.Count();
         return countFriends;
     }
