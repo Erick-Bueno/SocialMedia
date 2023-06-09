@@ -1,4 +1,4 @@
-using Comment.Controllers;
+using CommentController.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -11,7 +11,7 @@ public class CommentControllerTest
     {
         var commentServiceMock = new Mock<ICommentService>();
 
-        var commentController = new CommentController(commentServiceMock.Object);
+        var commentController = new Comment(commentServiceMock.Object);
 
         var commentDto = new CommentDto();
         commentDto.postId = Guid.NewGuid();
@@ -37,7 +37,7 @@ public class CommentControllerTest
     {
        var commentServiceMock = new Mock<ICommentService>();
 
-        var commentController = new CommentController(commentServiceMock.Object);
+        var commentController =  new Comment(commentServiceMock.Object);
 
         var commentDto = new CommentDto();
         commentDto.postId = Guid.NewGuid();

@@ -18,7 +18,9 @@ public class UserService : IUserService
 
     async public Task<ResponseRegister> register(UserRegisterDto userDto, IFormFile imagefileuser)
     {
+
         var userExists = userRepository.userRegistred(userDto.email);
+        var fileNamePhoto = "";
         var fileUrlPhoto = "";
         if (userExists != null)
         {
@@ -30,11 +32,13 @@ public class UserService : IUserService
             {
                 throw new ValidationException("Informe uma imagem valida");
             }
-            fileUrlPhoto = Guid.NewGuid() + imagefileuser.FileName;
-            saveUserPhoto(fileUrlPhoto, imagefileuser);
+            fileNamePhoto = Guid.NewGuid() + "_" + imagefileuser.FileName;
+            await saveUserPhoto(fileNamePhoto, imagefileuser);
+            fileUrlPhoto = "https://localhost:7088/UsersProfileImages/" + fileNamePhoto;
+
         }
-        
-        
+
+
         var userModel = convertUserDtoToUserModel(userDto, fileUrlPhoto);
         var encryptedPassword = BCrypt.Net.BCrypt.HashPassword(userModel.password);
         userModel.password = encryptedPassword;
@@ -70,18 +74,19 @@ public class UserService : IUserService
         return modelUser;
 
     }
-    public async void saveUserPhoto(string img, IFormFile imguser)
+    public async Task saveUserPhoto(string img, IFormFile imguser)
     {
         //verifica se o direito existe, e adiciona a foto
-        if (!Directory.Exists(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img))
+        if (!Directory.Exists(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\"))
         {
             Directory.CreateDirectory(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\");
         }
         //criando o arquivo no diretorio especificado
-        var stream = File.Create(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img);
 
-        //copiar o conteudo do arquivo e salva no aqrquivo criado
-        await imguser.CopyToAsync(stream);
+        using (var stream = System.IO.File.Create(webHostEnvironment.WebRootPath + "\\UsersProfileImages\\" + img))
+        {
+            await imguser.CopyToAsync(stream);
+        }
 
     }
 

@@ -1,15 +1,15 @@
-namespace Like.Controllers
+namespace LikeController.Controllers
 {
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class LikeController : ControllerBase
+    public class Like : ControllerBase
     {
         private readonly ILikeService likeService;
 
-        public LikeController(ILikeService likeService)
+        public Like(ILikeService likeService)
         {
             this.likeService = likeService;
         }
@@ -24,7 +24,8 @@ namespace Like.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                var responseError = new Response<LikesModel>(400, ex.Message);
+                return BadRequest(responseError);
             }
 
 

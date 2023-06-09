@@ -9,7 +9,8 @@ public class CommentServiceTest
     {
         var CommentRepositoryMock = new Mock<ICommentRepository>();
         var postRepositoryMock = new Mock<IPostRepository>();
-        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object);
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object, userRepositoryMock.Object);
 
         var commentDto = new CommentDto();
         commentDto.postId = Guid.NewGuid();
@@ -25,7 +26,8 @@ public class CommentServiceTest
     {
         var CommentRepositoryMock = new Mock<ICommentRepository>();
         var postRepositoryMock = new Mock<IPostRepository>();
-        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object);
+         var userRepositoryMock = new Mock<IUserRepository>();
+        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object, userRepositoryMock.Object);
 
 
         var commentDto = new CommentDto();
@@ -47,12 +49,18 @@ public class CommentServiceTest
         postModel.totalComments = 0;
         postModel.totalLikes = 0;
         postModel.userId = Guid.NewGuid();
-
+        var userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
 
         CommentRepositoryMock.Setup(cr => cr.createComment(It.IsAny<CommentModel>())).ReturnsAsync(CommentModel);
         postRepositoryMock.Setup(pr => pr.findPost(CommentModel.postId)).ReturnsAsync(postModel);
         var responseCommentCreated = new Response<CommentModel>(200, "comentario adicionado");
-
+        userRepositoryMock.Setup(ur => ur.findUser(CommentModel.userId)).ReturnsAsync(userModelTest);
         var Result = await CommentService.createComment(commentDto);
         Assert.IsType<Response<CommentModel>>(Result);
 
@@ -62,7 +70,8 @@ public class CommentServiceTest
     {
         var CommentRepositoryMock = new Mock<ICommentRepository>();
         var postRepositoryMock = new Mock<IPostRepository>();
-        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object);
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object, userRepositoryMock.Object);
 
 
         var commentDto = new CommentDto();

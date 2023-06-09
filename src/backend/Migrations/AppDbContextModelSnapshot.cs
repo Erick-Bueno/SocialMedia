@@ -115,8 +115,7 @@ namespace backend.Migrations
 
                     b.Property<string>("contentPost")
                         .IsRequired()
-                        .HasMaxLength(600)
-                        .HasColumnType("varchar(600)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("datePost")
                         .ValueGeneratedOnAdd()

@@ -1,15 +1,15 @@
-namespace Comment.Controllers
+namespace CommentController.Controllers
 {
     using System.ComponentModel.DataAnnotations;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
     [ApiController]
-    public class CommentController : ControllerBase
+    public class Comment : ControllerBase
     {
         private readonly ICommentService commentService;
 
-        public CommentController(ICommentService commentService)
+        public Comment(ICommentService commentService)
         {
             this.commentService = commentService;
         }
@@ -24,7 +24,8 @@ namespace Comment.Controllers
             }
             catch (ValidationException ex)
             {
-                return BadRequest(ex.Message);
+                var responseError = new Response<CommentModel>(400, ex.Message);
+                return BadRequest(responseError);
             }
 
 

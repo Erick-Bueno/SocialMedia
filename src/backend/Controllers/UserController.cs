@@ -42,10 +42,19 @@ namespace User.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserModel>> findUser([FromRoute] Guid id)
         {
-            var userData = await userService.findUser(id);
-            var countFriends = await userService.findFriends(id);
-            var responseFindedUser = new ResponseUserFinded(200, "Usuario encontrado", userData.userName, userData.userPhoto, countFriends);
-            return Ok(responseFindedUser);
+            try
+            {
+                var userData = await userService.findUser(id);
+                var countFriends = await userService.findFriends(id);
+                var responseFindedUser = new ResponseUserFinded(200, "Usuario encontrado", userData.userName, userData.userPhoto, countFriends);
+                return Ok(responseFindedUser);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                var responseError = new Response<UserModel>(400, ex.Message);
+                return BadRequest(responseError);
+            }
+
         }
     }
 }
