@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Moq;
 using Xunit;
 
@@ -7,8 +8,8 @@ public class RequestServiceTest
     public void convert_requestdto_to_requestmodel_test()
     {
         var requestRepositoryMock = new Mock<IRequestRepository>();
-
-        var requestService = new RequestService(requestRepositoryMock.Object);
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var requestService = new RequestService(requestRepositoryMock.Object, userRepositoryMock.Object);
 
         RequestDto requestDto = new RequestDto();
 
@@ -31,21 +32,26 @@ public class RequestServiceTest
 
     }
     [Fact]
-    async public void Add_request_return_test()
+    async public void should_add_request()
     {
         var requestRepositorymock = new Mock<IRequestRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
         RequestDto requestDto = new RequestDto();
         requestDto.receiverId = Guid.NewGuid();
         requestDto.requesterId = Guid.NewGuid();
         requestDto.status = StatusEnum.pending;
+        UserModel userModel = new UserModel();
 
         RequestsModel requestsModel = new RequestsModel();
         requestsModel.receiverId = requestDto.receiverId;
         requestsModel.requesterId = requestDto.requesterId;
         requestsModel.status = requestDto.status;
+        
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.receiverId)).ReturnsAsync(userModel);
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.requesterId)).ReturnsAsync(userModel);
         requestRepositorymock.Setup(rp => rp.findRequest(requestDto.receiverId, requestDto.requesterId)).Returns((RequestsModel)null);
         requestRepositorymock.Setup(rp => rp.createRequest(requestsModel)).ReturnsAsync(requestsModel);
-        var requestService = new RequestService(requestRepositorymock.Object);
+        var requestService = new RequestService(requestRepositorymock.Object, userRepositoryMock.Object);
         var result = await requestService.addRequest(requestDto);
         Assert.True(result);
 
@@ -54,6 +60,7 @@ public class RequestServiceTest
     async public void Add_request_exception_request_exists_Test()
     {
         var requestRepositorymock = new Mock<IRequestRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
         RequestDto requestDto = new RequestDto();
         requestDto.receiverId = Guid.NewGuid();
         requestDto.requesterId = Guid.NewGuid();
@@ -63,9 +70,15 @@ public class RequestServiceTest
         requestsModel.receiverId = requestDto.receiverId;
         requestsModel.requesterId = requestDto.requesterId;
         requestsModel.status = requestDto.status;
+        UserModel userModel = new UserModel();
+
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.receiverId)).ReturnsAsync(userModel);
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.requesterId)).ReturnsAsync(userModel);
+
         requestRepositorymock.Setup(rp => rp.findRequest(requestDto.receiverId, requestDto.requesterId)).Returns(requestsModel);
+
         requestRepositorymock.Setup(rp => rp.createRequest(requestsModel)).ReturnsAsync(requestsModel);
-        var requestService = new RequestService(requestRepositorymock.Object);
+        var requestService = new RequestService(requestRepositorymock.Object, userRepositoryMock.Object);
         var result = await requestService.addRequest(requestDto);
         Assert.False(result);
     }
@@ -88,11 +101,39 @@ public class RequestServiceTest
 
         requestRepositoryMock.Setup(rp => rp.findRequest(requestsModel.receiverId, requestsModel.requesterId)).Returns(requestsModel);
 
+        var userRepositoryMock = new Mock<IUserRepository>();
 
-        var requestService = new RequestService(requestRepositoryMock.Object);
+        var requestService = new RequestService(requestRepositoryMock.Object, userRepositoryMock.Object);
 
         var result = requestService.findRequest(requestsModel.receiverId, requestsModel.requesterId);
 
         Assert.Equal(result, requestsModel);
     }
+    [Fact]
+      async public void Add_request_exception_requester_or_receiver_ids_is_null()
+    {
+        var requestRepositorymock = new Mock<IRequestRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        RequestDto requestDto = new RequestDto();
+        requestDto.receiverId = Guid.NewGuid();
+        requestDto.requesterId = Guid.NewGuid();
+        requestDto.status = StatusEnum.pending;
+
+        RequestsModel requestsModel = new RequestsModel();
+        requestsModel.receiverId = requestDto.receiverId;
+        requestsModel.requesterId = requestDto.requesterId;
+        requestsModel.status = requestDto.status;
+        UserModel userModel = new UserModel();
+
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.receiverId)).ReturnsAsync((UserModel)null);
+        userRepositoryMock.Setup(ur => ur.findUser(requestsModel.requesterId)).ReturnsAsync((UserModel)null);
+
+        requestRepositorymock.Setup(rp => rp.findRequest(requestDto.receiverId, requestDto.requesterId)).Returns(requestsModel);
+
+ 
+        var requestService = new RequestService(requestRepositorymock.Object, userRepositoryMock.Object);
+        var result = await requestService.addRequest(requestDto);
+        Assert.False(result);
+    }
+
 }

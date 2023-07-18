@@ -10,11 +10,12 @@ namespace User.Controllers
     public class UserController : ControllerBase
     {
         public IUserService userService { get; set; }
+        public IFriendsService friendsService { get; set; }
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, IFriendsService friendsService)
         {
             this.userService = userService;
-
+            this.friendsService = friendsService;
         }
 
         [HttpPost]
@@ -45,7 +46,7 @@ namespace User.Controllers
             try
             {
                 var userData = await userService.findUser(id);
-                var countFriends = await userService.findFriends(id);
+                var countFriends = friendsService.findFriends(id);
                 var responseFindedUser = new ResponseUserFinded(200, "Usuario encontrado", userData.userName, userData.userPhoto, countFriends);
                 return Ok(responseFindedUser);
             }

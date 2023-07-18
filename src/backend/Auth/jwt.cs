@@ -3,10 +3,13 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
+
 public class Jwt:Ijwt
 {
     public string generateJwt(UserModel user){
+        DotNetEnv.Env.Load();
         String jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+        Console.WriteLine(jwtSecret);
         var generateToken = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(jwtSecret);
         var contentToken = new SecurityTokenDescriptor{

@@ -16,28 +16,55 @@ namespace PostController.Controllers
         }
 
         [HttpPost]
+
         public async Task<ActionResult<PostModel>> createPost([FromForm] PostDto postDto, [FromForm] PostImagesDto? postImages)
         {
             try
             {
                 var newPost = await postService.createPost(postDto, postImages);
-                return Created("https://localhost:7088/api/Post",newPost);
+                return Created("https://localhost:7088/api/Post", newPost);
             }
             catch (ValidationException ex)
             {
                 Response<PostModel> responseError = new Response<PostModel>(400, ex.Message);
-                return BadRequest(responseError); 
+                return BadRequest(responseError);
             }
-            catch(DbUpdateException ex){
-                 Response<PostModel> responseError = new Response<PostModel>(500, ex.Message);
-                 return BadRequest(responseError); 
+            catch (DbUpdateException ex)
+            {
+                Response<PostModel> responseError = new Response<PostModel>(500, ex.Message);
+                return BadRequest(responseError);
             }
 
         }
+        [Route("list/{id?}")]
         [HttpGet]
-        public ActionResult<PostModel> listPosts(){
-            var listPosts = postService.listPosts();
+
+        public ActionResult<PostModel> listPosts([FromRoute] Guid id)
+        {
+
+            var listPosts = postService.listPosts(id);
             return Ok(listPosts);
+        }
+        [HttpGet("{id}")]
+        public async Task<ActionResult<PostModel>> listPostsUserLiked([FromRoute] Guid id)
+        {
+            try
+            {
+                var listPostsUserLiked = await postService.listPostsUserLike(id);
+                return Ok(listPostsUserLiked);
+            }
+            catch (ValidationException ex)
+            {
+                Response<PostModel> responseError = new Response<PostModel>(400, ex.Message);
+                return BadRequest(responseError);
+            }
+
+        }
+        [HttpPost("{id}")]
+        public ActionResult<PostModel> listPostsSeeMore([FromRoute] Guid id, [FromBody] string date){
+            
+            var listPostsSeeMore = postService.listPostsSeeMore(id, date);
+            return Ok(listPostsSeeMore);
         }
     }
 }

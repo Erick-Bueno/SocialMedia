@@ -35,9 +35,9 @@ public class CommentControllerTest
     [Fact]
     public async void should_to_check_the_content_in_okobjectresult_returned_when_comment_created()
     {
-       var commentServiceMock = new Mock<ICommentService>();
+        var commentServiceMock = new Mock<ICommentService>();
 
-        var commentController =  new Comment(commentServiceMock.Object);
+        var commentController = new Comment(commentServiceMock.Object);
 
         var commentDto = new CommentDto();
         commentDto.postId = Guid.NewGuid();
@@ -55,5 +55,22 @@ public class CommentControllerTest
         var content = Assert.IsType<OkObjectResult>(okobjectresult.Result).Value;
 
         Assert.IsType<Response<CommentModel>>(content);
+    }
+    [Fact]
+    public void should_to_return_an_okobjectresult_response()
+    {
+        var commentServiceMock = new Mock<ICommentService>();
+
+        var commentController = new Comment(commentServiceMock.Object);
+        var userCommentsLinq = new UserCommentsLinq();
+        var listUserComments = new List<UserCommentsLinq>{userCommentsLinq};
+        var id = Guid.NewGuid();
+        commentServiceMock.Setup(cs => cs.listComment(id)).Returns(listUserComments);
+
+        var result = commentController.listComment(id);
+        var okobjectresult = Assert.IsType<ActionResult<CommentModel>>(result);
+        var content = Assert.IsType<OkObjectResult>(okobjectresult.Result).Value;
+
+        Assert.IsType<List<UserCommentsLinq>>(content);
     }
 }

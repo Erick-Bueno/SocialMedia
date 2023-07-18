@@ -6,18 +6,18 @@ public class PostService : IPostService
 {
     private readonly IPostRepository postRepository;
     private readonly IWebHostEnvironment webHostEnvironment;
-    public PostService(IPostRepository postRepository, IWebHostEnvironment webHostEnvironment)
+    private readonly IUserRepository userRepository;
+    public PostService(IPostRepository postRepository, IWebHostEnvironment webHostEnvironment, IUserRepository userRepository)
     {
         this.postRepository = postRepository;
         this.webHostEnvironment = webHostEnvironment;
+        this.userRepository = userRepository;
     }
 
     public PostModel convertPostDtoToPostModel(PostDto post)
     {
         var postModel = new PostModel();
         postModel.contentPost = post.contentPost;
-        postModel.totalComments = post.totalComments;
-        postModel.totalLikes = post.totalLikes;
         postModel.userId = post.userId;
         return postModel;
     }
@@ -32,9 +32,14 @@ public class PostService : IPostService
 
     public async Task<Response<PostModel>> createPost(PostDto post, PostImagesDto postImages)
     {
+      
+
+        if(postImages.imgUrl?.Count == null && string.IsNullOrEmpty(post.contentPost)){
+            throw new ValidationException("Impossivel criar uma postagem vazia");
+        }
         if (postImages.imgUrl != null && postImages.imgUrl.Count > 4)
         {
-            throw new ValidationException("informe um numero valido de imagens");
+            throw new ValidationException("informe um numero valido de imagens, numero maximo de imagens por post é 4");
         }
         var postModel = convertPostDtoToPostModel(post);
         var newPost = await postRepository.createPost(postModel);
@@ -50,7 +55,7 @@ public class PostService : IPostService
 
                 if (postImage.ContentType != "image/png" && postImage.ContentType != "image/jpg" && postImage.ContentType != "image/jpeg")
                 {
-                    throw new ValidationException("Informe imagens validas");
+                    throw new ValidationException("Informe imagens validas, os formatos aceitos são jpeg e png");
                 }
                 var NameImg = Guid.NewGuid() + "_" + postImage.FileName;
                 var urlImg = "https://localhost:7088/PostsImages/" + NameImg;
@@ -77,9 +82,24 @@ public class PostService : IPostService
         }
     }
 
-    public List<PostsLinq> listPosts()
+    public List<PostsLinq> listPosts(Guid id)
     {
-        var listPosts = postRepository.listPosts();
+        var listPosts = postRepository.listPosts(id);
         return listPosts;
+    }
+    public async Task<List<PostsLikeListLinq>> listPostsUserLike(Guid id){
+        var findUser = await userRepository.findUser(id);
+        if(findUser == null){
+            throw new ValidationException("Úsuario não existe");
+        }
+        var listPostsUserLike = postRepository.listPostsUserLike(id);
+        return listPostsUserLike;
+    }
+
+    public List<PostsLinq> listPostsSeeMore(Guid id, string date)
+    {
+       var convertedData = DateTime.Parse(date);
+       var listPostsSeeMore = postRepository.listPostsSeeMore(id, convertedData);
+       return listPostsSeeMore;
     }
 }

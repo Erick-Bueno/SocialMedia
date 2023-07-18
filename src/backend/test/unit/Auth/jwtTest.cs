@@ -16,7 +16,8 @@ public class jwtTest
         userModeltest.userPhoto =  "llll";
 
         Jwt jwt = new Jwt();
-        
+        Environment.SetEnvironmentVariable("JWT_SECRET", "72ba27d1c9b3d61d75008987546a09c20bf732d1");
+
         var result = jwt.generateJwt(userModeltest);
 
         Assert.IsType<String>(result);

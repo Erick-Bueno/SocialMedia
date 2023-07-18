@@ -114,18 +114,21 @@ namespace backend.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("contentPost")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("datePost")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("totalComments")
-                        .HasColumnType("int");
+                    b.Property<int?>("totalComments")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
-                    b.Property<int>("totalLikes")
-                        .HasColumnType("int");
+                    b.Property<int?>("totalLikes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<Guid>("userId")
                         .HasColumnType("char(36)");

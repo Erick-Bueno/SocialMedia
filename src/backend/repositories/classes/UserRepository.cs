@@ -43,10 +43,5 @@ public class UserRepository : IUserRepository
         var userRegistred = _context.Users.Where(u => u.email == Email).FirstOrDefault();
         return userRegistred;
     }
-    public int findFriends(Guid id)
-    {
-        var listFriends = _context.Friends.Where(f => f.userId == id || f.userId2 == id);
-        var countFriends = listFriends.Count();
-        return countFriends;
-    }
+
 }

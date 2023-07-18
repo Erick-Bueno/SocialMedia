@@ -38,35 +38,56 @@ public class PostRepository : IPostRepository
         return findedPost;
     }
 
-    public List<PostsLinq> listPosts()
+    public List<PostsLinq> listPosts(Guid id = default(Guid))
     {
+        var userId = id;
         var ListPosts = (
-        from post in _context.Posts 
-        join post_image in _context.Posts_images on post.id equals post_image.postId 
-        into postImages from post_image in postImages.DefaultIfEmpty() 
+        from post in _context.Posts
+        join post_image in _context.Posts_images on post.id equals post_image.postId
+        into postImages
+        from post_image in postImages.DefaultIfEmpty()
         join user in _context.Users on post.userId equals user.id
-        group post_image by new {
+        group post_image by new
+        {
             post.id,
             post.contentPost,
             post.datePost,
             post.totalComments,
             post.totalLikes,
             user.userName,
-            user.userPhoto
+            user.userPhoto,
         } into p
         orderby p.Key.datePost descending
-        select new PostsLinq 
-        { 
-        postId = p.Key.id,
-        contentPost = p.Key.contentPost, 
-        postImages = p.Select(pi => pi.imgUrl).ToList(),
-        postDate =  p.Key.datePost, 
-        totalComments =  p.Key.totalComments, 
-        totalLikes = p.Key.totalLikes,
-        userName = p.Key.userName,
-        userPhoto = p.Key.userPhoto
+        select new PostsLinq
+        {
+            postId = p.Key.id,
+            contentPost = p.Key.contentPost,
+            postImages = p.Select(pi => pi.imgUrl).ToList(),
+            postDate = p.Key.datePost.AddHours(-3).ToLongTimeString(),
+            totalComments = p.Key.totalComments,
+            totalLikes = p.Key.totalLikes,
+            userName = p.Key.userName,
+            userPhoto = p.Key.userPhoto,
+
         }).ToList();
-        return ListPosts;
+
+        var ListPostsLikes = (
+        from post in ListPosts
+        join like in _context.Likes.Where(l => l.userId == userId) on post.postId equals like.postId into likes
+        from like in likes.DefaultIfEmpty()
+        select new PostsLinq
+        {
+            postId = post.postId,
+            contentPost = post.contentPost,
+            postImages = post.postImages,
+            postDate = post.postDate,
+            totalComments = post.totalComments,
+            totalLikes = post.totalLikes,
+            userName = post.userName,
+            userPhoto = post.userPhoto,
+            isfavorited = like != null
+        }).Take(5).ToList();
+        return ListPostsLikes;
     }
 
     public async Task updateTotalComments(PostModel post)
@@ -76,10 +97,98 @@ public class PostRepository : IPostRepository
 
     }
 
-    public async Task updateTotalLikes(PostModel post)
+    public async Task updateTotalLikes(PostModel post, int increment)
     {
-        post.totalLikes += 1;
+        post.totalLikes += increment;
         await _context.SaveChangesAsync();
+    }
+    public List<PostsLikeListLinq> listPostsUserLike(Guid id)
+    {
+        var ListUserLikePosts = (
+        from post in _context.Posts
+        join post_image in _context.Posts_images on post.id equals post_image.postId
+        into postImages
+        from post_image in postImages.DefaultIfEmpty()
+        join user in _context.Users on post.userId equals user.id
+        join like in _context.Likes on post.id equals like.postId
+        group post_image by new
+        {
+            post.id,
+            post.contentPost,
+            post.datePost,
+            post.totalComments,
+            post.totalLikes,
+            user.userName,
+            user.userPhoto,
+            like.userId
+        } into p
+        orderby p.Key.datePost descending
+        select new PostsLikeListLinq
+        {
+            postId = p.Key.id,
+            likeUserId = p.Key.userId,
+            contentPost = p.Key.contentPost,
+            postImages = p.Select(pi => pi.imgUrl).ToList(),
+            postDate = p.Key.datePost.AddHours(-3).ToLongTimeString(),
+            totalComments = p.Key.totalComments,
+            totalLikes = p.Key.totalLikes,
+            userName = p.Key.userName,
+            userPhoto = p.Key.userPhoto,
+
+        }).Where(l => l.likeUserId == id).Take(5).ToList();
+        return ListUserLikePosts;
+    }
+    public List<PostsLinq> listPostsSeeMore(Guid id, DateTime data)
+    {
+        var userId = id;
+        var ListPosts = (
+        from post in _context.Posts
+        join post_image in _context.Posts_images on post.id equals post_image.postId
+        into postImages
+        from post_image in postImages.DefaultIfEmpty()
+        join user in _context.Users on post.userId equals user.id
+        group post_image by new
+        {
+            post.id,
+            post.contentPost,
+            post.datePost,
+            post.totalComments,
+            post.totalLikes,
+            user.userName,
+            user.userPhoto,
+        } into p
+        orderby p.Key.datePost descending
+        where p.Key.datePost < data
+        select new PostsLinq
+        {
+            postId = p.Key.id,
+            contentPost = p.Key.contentPost,
+            postImages = p.Select(pi => pi.imgUrl).ToList(),
+            postDate = p.Key.datePost.AddHours(-3).ToLongTimeString(),
+            totalComments = p.Key.totalComments,
+            totalLikes = p.Key.totalLikes,
+            userName = p.Key.userName,
+            userPhoto = p.Key.userPhoto,
+
+        }).ToList();
+
+        var ListPostsLikes = (
+        from post in ListPosts
+        join like in _context.Likes.Where(l => l.userId == userId) on post.postId equals like.postId into likes
+        from like in likes.DefaultIfEmpty()
+        select new PostsLinq
+        {
+            postId = post.postId,
+            contentPost = post.contentPost,
+            postImages = post.postImages,
+            postDate = post.postDate,
+            totalComments = post.totalComments,
+            totalLikes = post.totalLikes,
+            userName = post.userName,
+            userPhoto = post.userPhoto,
+            isfavorited = like != null
+        }).Take(5).ToList();
+        return ListPostsLikes;
     }
 
 }

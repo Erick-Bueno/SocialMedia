@@ -33,6 +33,8 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 builder.Services.AddScoped<ILikeService, LikeService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IFriendsRepository, FriendsRepository>();
+builder.Services.AddScoped<IFriendsService, FriendsService>();
 builder.Services.AddSignalR();
 builder.Services.AddCors();
 var chave = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET"));

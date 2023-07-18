@@ -4,13 +4,15 @@ public class HubSolicitation:Hub
 {
     private readonly IRequestService requestService;
     private readonly IUserService userService;
+    private readonly IFriendsRepository friendsRepository;
     private Dictionary<string, string> usersConnecteds { get; set; } = new Dictionary<string, string>();
    
 
-    public HubSolicitation(IRequestService requestService, IUserService userService)
+    public HubSolicitation(IRequestService requestService, IUserService userService, IFriendsRepository friendsRepository)
     {
         this.requestService = requestService;
         this.userService = userService;
+        this.friendsRepository = friendsRepository;
     }
     public Dictionary<string, string> getUsersConnecteds(){
         return usersConnecteds;
@@ -20,6 +22,11 @@ public class HubSolicitation:Hub
         requestDto.receiverId = receiver_id;
         requestDto.requesterId = requester_id;
         requestDto.status =  status;
+        var areFriends = friendsRepository.checkIfAreFriends(receiver_id, requester_id);
+        if(areFriends != null){
+            await Clients.Caller.SendAsync("SolicitationError", "Esses usuarios ja são amigos");
+            return;
+        }
         var addRequest = await requestService.addRequest(requestDto);
         if(addRequest == false){
             await Clients.Caller.SendAsync("SolicitationError", "Erro ao enviar solicitação");

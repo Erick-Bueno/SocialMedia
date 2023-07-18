@@ -192,31 +192,6 @@ public class UserServiceTest
         Assert.Equal(result, userModelTest);
     }
     [Fact]
-    public async void should_to_find_the_quantity_of_users_friends()
-    {
-        var userRepositoryMock = new Mock<IUserRepository>();
-        UserModel userModelTest = new UserModel();
-        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
-        var tokenRepositoryMock = new Mock<ITokenRepository>();
-        var jwtmock = new Mock<Ijwt>();
-
-        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object);
-
-        userModelTest.id = Guid.NewGuid();
-        userModelTest.email = "erickjb93@gmail.com";
-        userModelTest.password = "Sirlei231";
-        userModelTest.userName = "erick";
-        userModelTest.telephone = "77799591703";
-        userModelTest.userPhoto = "llll";
-
-
-        userRepositoryMock.Setup(ur => ur.findFriends( userModelTest.id)).Returns(1);
-
-        var result = await userService.findFriends(userModelTest.id);
-
-        Assert.Equal(result, 1);
-    }
-    [Fact]
     public async void should_to_add_user_no_profile_picture()
     {
         var userRepositoryMock = new Mock<IUserRepository>();

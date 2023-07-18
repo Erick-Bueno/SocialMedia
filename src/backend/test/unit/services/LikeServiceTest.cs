@@ -55,7 +55,7 @@ public class LikeServiceTest
         LikeRepositoryMock.Setup(lr => lr.createLike(It.IsAny<LikesModel>())).ReturnsAsync(LikesModel);
         postRepositoryMock.Setup(pr => pr.findPost(LikesModel.postId)).ReturnsAsync(postModel);
 
-        userRepositoryMock.Setup(ur => ur.findUser( LikesModel.userId)).ReturnsAsync(userModelTest);
+        userRepositoryMock.Setup(ur => ur.findUser(LikesModel.userId)).ReturnsAsync(userModelTest);
         var responseLikeCreated = new Response<LikesModel>(200, "comentario adicionado");
 
         var Result = await LikeService.createLike(LikeDto);
@@ -130,5 +130,38 @@ public class LikeServiceTest
 
         var Result = LikeService.createLike(LikeDto);
         await Assert.ThrowsAsync<ValidationException>(() => Result);
+    }
+    [Fact]
+    public async void should_to_remove_like_registration_if_exists()
+    {
+
+        var LikeRepositoryMock = new Mock<ILikeRepository>();
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var LikeService = new LikeService(LikeRepositoryMock.Object, postRepositoryMock.Object, userRepositoryMock.Object);
+    
+        var LikeDto = new LikeDto();
+        LikeDto.postId = Guid.NewGuid();
+        LikeDto.userId = Guid.NewGuid();
+         var LikesModel = new LikesModel();
+        LikesModel.postId = LikeDto.postId;
+        LikesModel.userId = Guid.NewGuid();
+        var postModel = new PostModel();
+        postModel.id = Guid.NewGuid();
+        postModel.datePost = DateTime.UtcNow;
+        postModel.totalComments = 0;
+        postModel.totalLikes = 0;
+        postModel.userId = Guid.NewGuid();
+
+        LikeRepositoryMock.Setup(lp => lp.removeLike(LikesModel)).ReturnsAsync(true);
+        LikeRepositoryMock.Setup(lp => lp.findLike(LikeDto.userId, LikeDto.postId)).Returns(LikesModel);
+        postRepositoryMock.Setup(lp => lp.findPost(LikesModel.postId)).ReturnsAsync(postModel);
+
+        var result = await LikeService.createLike(LikeDto);
+        var responseLikeRemoved = new Response<LikesModel>(200, "Like removido");
+        Assert.Equal(result.Message, responseLikeRemoved.Message);
+        Assert.Equal(result.Status, responseLikeRemoved.Status);
+
+
     }
 }

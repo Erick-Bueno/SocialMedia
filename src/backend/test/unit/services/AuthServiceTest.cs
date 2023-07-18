@@ -82,7 +82,7 @@ public class AuthServiceTest
         var bcrypt = new Mock<IBcryptTest>();
 
         var tokenRepositoryMock = new Mock<ITokenRepository>();
-
+        Environment.SetEnvironmentVariable("JWT_SECRET", "72ba27d1c9b3d61d75008987546a09c20bf732d1");
         UserModel userModelTest = new UserModel();
         userModelTest.id = Guid.NewGuid();
         userModelTest.email = "erickjb93@gmail.com";

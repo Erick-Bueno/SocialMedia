@@ -42,4 +42,10 @@ public class CommentService : ICommentService
         await postRepository.updateTotalComments(findedPost);
         return responseCommentCreated;
     }
+
+    public List<UserCommentsLinq> listComment(Guid idPost)
+    {
+       var listComment = commentRepository.listComment(idPost);
+       return listComment;
+    }
 }

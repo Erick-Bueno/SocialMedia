@@ -29,14 +29,25 @@ public class LikeService : ILikeService
         {
             throw new ValidationException("Postagem não encontrada");
         }
+        var findedLike = likeRepository.findLike(Like.userId, Like.postId);
+        if (findedLike != null)
+        {
+            var removeLike = await likeRepository.removeLike(findedLike);
+            postRepository.updateTotalLikes(findedPost, -1);
+            var responseLikeRemoved = new Response<LikesModel>(200, "Like removido");
+            return responseLikeRemoved;
+        }
         var findedUser = await userRepository.findUser(LikeModel.userId);
-        if(findedUser == null){
+        if (findedUser == null)
+        {
             throw new ValidationException("Usuário não encontrada");
         }
         var newComment = await likeRepository.createLike(LikeModel);
         var responseLikeCreated = new Response<LikesModel>(200, "Like adicionado");
 
-        await postRepository.updateTotalLikes(findedPost);
+        await postRepository.updateTotalLikes(findedPost, 1);
         return responseLikeCreated;
     }
+
+  
 }

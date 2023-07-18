@@ -95,11 +95,8 @@ public class UserService : IUserService
         var userData = await userRepository.findUser(id);
         return userData;
     }
-    public async Task<int> findFriends(Guid id)
-    {
-        var countFriends = userRepository.findFriends(id);
-        return countFriends;
-    }
+
+    
 
 
 }

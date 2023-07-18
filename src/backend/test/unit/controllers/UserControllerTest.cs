@@ -29,10 +29,10 @@ public class UserControllerTest
         var filePhoto = "imagem.jpg";
         userDto.userImageFile = filephotomock.Object;
         var userServiceMock = new Mock<IUserService>();
-
+        var friendsServiceMock = new Mock<IFriendsService>();
         
 
-        var userController = new UserController(userServiceMock.Object);
+        var userController = new UserController(userServiceMock.Object, friendsServiceMock.Object);
 
         ResponseRegister responseTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(), "testejwt");
 
@@ -49,13 +49,16 @@ public class UserControllerTest
         var userServiceMock = new Mock<IUserService>();
 
         
-        var userControllerTest = new UserController(userServiceMock.Object);
+         var friendsServiceMock = new Mock<IFriendsService>();
+        
+
+        var userController = new UserController(userServiceMock.Object, friendsServiceMock.Object);
 
         ResponseRegister responseRegisterTest = new ResponseRegister(200,"usuario cadastrado", Guid.NewGuid(),"testejwt");
 
         userServiceMock.Setup(us => us.register(userDto,userDto.userImageFile)).ReturnsAsync(responseRegisterTest);
 
-        var result = await userControllerTest.registerUser(userDto,userDto.userImageFile);
+        var result = await userController.registerUser(userDto,userDto.userImageFile);
 
         var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
       
@@ -65,7 +68,11 @@ public class UserControllerTest
     public async void should_to_return_a_response_with_user_data ()
     {
         var userServiceMock = new Mock<IUserService>();
-        var UserControllerTest = new UserController(userServiceMock.Object);
+        var friendsServiceMock = new Mock<IFriendsService>();
+        
+
+     
+        var UserControllerTest = new UserController(userServiceMock.Object,friendsServiceMock.Object);
         var userModeltest = new UserModel();
         userModeltest.id = Guid.NewGuid();
         userModeltest.email = "erickjb93@gmail.com";

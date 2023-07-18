@@ -90,7 +90,7 @@ public class AuthRepositoryTest
         userModeltest.userName = "erick";
         userModeltest.telephone ="77799591703";
         userModeltest.userPhoto =  "llll";
-
+        Environment.SetEnvironmentVariable("JWT_SECRET","72ba27d1c9b3d61d75008987546a09c20bf732d1");
         TokenModel token = new TokenModel();
         Jwt jwt = new Jwt();
         token.email = "erickjb93@gmail.com";

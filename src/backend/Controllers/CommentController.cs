@@ -30,5 +30,10 @@ namespace CommentController.Controllers
 
 
         }
+        [HttpGet("{id}")]
+        public ActionResult<CommentModel> listComment([FromRoute] Guid id){
+            var listComments = commentService.listComment(id);
+            return Ok(listComments);
+        }
     }
 }

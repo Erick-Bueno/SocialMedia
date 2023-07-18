@@ -6,7 +6,7 @@ public class PostModel
     public Guid id { get; set; }
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime datePost { get; set; } = DateTime.UtcNow;
-    public string contentPost { get; set; }
+    public string? contentPost { get; set; }
     public Guid userId {get; set;}
     public Int32 totalLikes {get; set;}
     public Int32 totalComments{get; set;}

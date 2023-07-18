@@ -23,4 +23,17 @@ public class LikeRepository : ILikeRepository
         }
 
     }
+
+    public LikesModel findLike(Guid userId, Guid postId)
+    {
+        var registrationLikesTable =  _context.Likes.Where(l => l.postId == postId && l.userId == userId).FirstOrDefault();
+        return registrationLikesTable;
+    }
+
+    public async Task<bool> removeLike(LikesModel likes)
+    {
+        var registrationRemoved = _context.Likes.Remove(likes);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

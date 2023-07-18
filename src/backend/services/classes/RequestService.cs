@@ -1,17 +1,28 @@
+using System.ComponentModel.DataAnnotations;
+
 public class RequestService : IRequestService
 {
     private readonly IRequestRepository requestRepository;
+    private readonly IUserRepository userRepository;
 
-    public RequestService(IRequestRepository requestRepository)
+    public RequestService(IRequestRepository requestRepository, IUserRepository userRepository)
     {
         this.requestRepository = requestRepository;
+        this.userRepository = userRepository;
     }
 
     public async Task<bool> addRequest(RequestDto requestDto)
     {
-        var requestExists = requestRepository.findRequest(requestDto.receiverId, requestDto.requesterId);
-        if(requestExists != null){
+        var userReceiverExists = await userRepository.findUser(requestDto.receiverId);
+        var userRequesterExists = await userRepository.findUser(requestDto.requesterId);
+        if (userReceiverExists == null || userRequesterExists == null)
+        {
            return false;
+        }
+        var requestExists = requestRepository.findRequest(requestDto.receiverId, requestDto.requesterId);
+        if (requestExists != null)
+        {
+            return false;
         }
         var requestModel = converteToRequestModel(requestDto);
         var addRequest = await requestRepository.createRequest(requestModel);
@@ -28,7 +39,7 @@ public class RequestService : IRequestService
         return requests;
     }
 
-    public  RequestsModel findRequest(Guid receiverId, Guid requesterId)
+    public RequestsModel findRequest(Guid receiverId, Guid requesterId)
     {
         var requestData = requestRepository.findRequest(receiverId, requesterId);
         return requestData;
