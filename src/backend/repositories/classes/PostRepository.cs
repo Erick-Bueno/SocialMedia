@@ -138,8 +138,7 @@ public class PostRepository : IPostRepository
         }).Where(l => l.likeUserId == id).Take(5).ToList();
         return ListUserLikePosts;
     }
-    public List<PostsLinq> listPostsSeeMore(Guid id, DateTime data)
-    {
+     public List<PostsLinq> listPostsSeeMore( DateTime data, Guid id = default(Guid)){
         var userId = id;
         var ListPosts = (
         from post in _context.Posts
@@ -189,6 +188,6 @@ public class PostRepository : IPostRepository
             isfavorited = like != null
         }).Take(5).ToList();
         return ListPostsLikes;
-    }
+     }
 
 }

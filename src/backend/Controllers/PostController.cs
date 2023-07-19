@@ -60,10 +60,10 @@ namespace PostController.Controllers
             }
 
         }
-        [HttpPost("{id}")]
+        [HttpPost("seemore/{id?}")]
         public ActionResult<PostModel> listPostsSeeMore([FromRoute] Guid id, [FromBody] string date){
             
-            var listPostsSeeMore = postService.listPostsSeeMore(id, date);
+            var listPostsSeeMore = postService.listPostsSeeMore(date, id);
             return Ok(listPostsSeeMore);
         }
     }

@@ -12,6 +12,6 @@ public interface IPostService
 
     public Task<List<PostsLikeListLinq>> listPostsUserLike(Guid id);
 
-    public List<PostsLinq> listPostsSeeMore(Guid id, string date);
+    public List<PostsLinq> listPostsSeeMore( string date, Guid id);
 
 }

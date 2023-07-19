@@ -96,10 +96,10 @@ public class PostService : IPostService
         return listPostsUserLike;
     }
 
-    public List<PostsLinq> listPostsSeeMore(Guid id, string date)
+    public List<PostsLinq> listPostsSeeMore(string date, Guid id)
     {
        var convertedData = DateTime.Parse(date);
-       var listPostsSeeMore = postRepository.listPostsSeeMore(id, convertedData);
+       var listPostsSeeMore = postRepository.listPostsSeeMore(convertedData,id);
        return listPostsSeeMore;
     }
 }

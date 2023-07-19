@@ -277,9 +277,9 @@ public class PostServiceTest
 
         List<PostsLinq> listPostsLinq = new List<PostsLinq>();
 
-        postRepositoryMock.Setup(pr => pr.listPostsSeeMore(userModelTest.id, date)).Returns(listPostsLinq);
+        postRepositoryMock.Setup(pr => pr.listPostsSeeMore(date, userModelTest.id)).Returns(listPostsLinq);
 
-        var result = postService.listPostsSeeMore(userModelTest.id, date.ToString());
+        var result = postService.listPostsSeeMore(date.ToString(),userModelTest.id);
 
         Assert.IsType<List<PostsLinq>>(result);
     }

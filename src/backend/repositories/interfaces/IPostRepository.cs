@@ -7,6 +7,6 @@ public interface IPostRepository
     public Task<PostImagesModel> createPostImages(PostImagesModel postImages);
     public List<PostsLinq> listPosts(Guid id);
     public List<PostsLikeListLinq> listPostsUserLike(Guid id);
-    public List<PostsLinq> listPostsSeeMore(Guid id, DateTime data);
+    public List<PostsLinq> listPostsSeeMore(DateTime data, Guid id);
     
 }

@@ -73,7 +73,7 @@ public class PostControllerTest
         var date = new DateTime();
         List<PostsLinq> listPostsLinq = new List<PostsLinq>();
 
-        postServiceMock.Setup(ps => ps.listPostsSeeMore(userModelTest.id, date.ToString() )).Returns(listPostsLinq);
+        postServiceMock.Setup(ps => ps.listPostsSeeMore(date.ToString(), userModelTest.id )).Returns(listPostsLinq);
 
         var result = postController.listPostsSeeMore(userModelTest.id, date.ToString());
 

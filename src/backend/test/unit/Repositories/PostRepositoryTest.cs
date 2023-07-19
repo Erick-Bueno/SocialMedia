@@ -355,7 +355,7 @@ public class PostRepositoryTest
 
         var date = new DateTime();
 
-        var result = postRepository.listPostsSeeMore(userModelTest.id, date);
+        var result = postRepository.listPostsSeeMore(date, userModelTest.id);
 
         Assert.IsType<List<PostsLinq>>(result);
 
