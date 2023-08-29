@@ -57,6 +57,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 var app = builder.Build();
+
 app.UseCors(c =>
 {
     c.AllowAnyHeader();
@@ -64,6 +65,7 @@ app.UseCors(c =>
     c.AllowCredentials();
     c.WithOrigins("http://localhost:8080");
 }); ;
+
 app.UseRouting();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -71,6 +73,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.UseEndpoints(endpoints =>
 {
@@ -79,8 +84,8 @@ app.UseEndpoints(endpoints =>
 });
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+

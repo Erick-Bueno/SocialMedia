@@ -26,14 +26,32 @@ public class CommentRepository : ICommentRepository
 
     public List<UserCommentsLinq> listComment(Guid idPost)
     {
-        var listComment = (from comment in _context.Comments join user in _context.Users on comment.userId equals user.id where comment.postId == idPost
-        select new UserCommentsLinq{
-            userName = user.userName,
-            comment = comment.comment,
-            userPhoto = user.userPhoto
-        }).ToList();
+        var listComment = (from comment in _context.Comments
+                           join user in _context.Users on comment.userId equals user.id
+                           where comment.postId == idPost
+                           select new UserCommentsLinq
+                           {
+                               userName = user.userName,
+                               comment = comment.comment,
+                               userPhoto = user.userPhoto
+                           }).Take(4).ToList();
 
         return listComment;
     }
-  
+
+    public List<UserCommentsLinq> listCommentSeeMore(Guid idPost, DateTime date)
+    {
+        var listCommentSeeMore = (from comment in _context.Comments
+                           join user in _context.Users on comment.userId equals user.id
+                           where comment.postId == idPost && comment.dateComment < date
+                           select new UserCommentsLinq
+                           {
+                               userName = user.userName,
+                               comment = comment.comment,
+                               userPhoto = user.userPhoto,
+                               dateComment = comment.dateComment
+                           }).Take(4).ToList();
+
+        return listCommentSeeMore;
+    }
 }

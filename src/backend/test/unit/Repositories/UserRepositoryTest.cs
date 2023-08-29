@@ -150,7 +150,71 @@ public class UserRepositoryTest
 
         Assert.Equal(result, userModelTest);
     }
+    [Fact]
+    public void should_to_find_first_five_users_searched()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName: "teste").Options;
+
+        var appDbContextMock = new Mock<AppDbContext>(options);
+
+        var userRepository = new UserRepository(appDbContextMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
 
 
+        var listUsers = new List<UserModel> { userModelTest }.AsQueryable();
+
+        var dbSetUserMock = new Mock<DbSet<UserModel>>();
+
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.Provider).Returns(listUsers.Provider);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.Expression).Returns(listUsers.Expression);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.ElementType).Returns(listUsers.ElementType);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.GetEnumerator()).Returns(listUsers.GetEnumerator());
+
+        appDbContextMock.Setup(db => db.Users).Returns(dbSetUserMock.Object);
+
+        var result = userRepository.findFiveFirstUserSearched(userModelTest.userName);
+
+        Assert.IsType<List<SearchUserLinq>>(result);
+    }
+    [Fact]
+    public void should_to_list_next_users_searched()
+    {
+        var options = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase(databaseName: "teste").Options;
+
+        var appDbContextMock = new Mock<AppDbContext>(options);
+
+        var userRepository = new UserRepository(appDbContextMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+
+        var listUsers = new List<UserModel> { userModelTest }.AsQueryable();
+
+        var dbSetUserMock = new Mock<DbSet<UserModel>>();
+
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.Provider).Returns(listUsers.Provider);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.Expression).Returns(listUsers.Expression);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.ElementType).Returns(listUsers.ElementType);
+        dbSetUserMock.As<IQueryable<UserModel>>().Setup(x => x.GetEnumerator()).Returns(listUsers.GetEnumerator());
+
+        appDbContextMock.Setup(db => db.Users).Returns(dbSetUserMock.Object);
+
+        var result = userRepository.findUserSearchedScrolling(userModelTest.id ,userModelTest.userName);
+
+        Assert.IsType<List<SearchUserLinq>>(result);
+    }
 
 }

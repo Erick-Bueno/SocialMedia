@@ -1,6 +1,7 @@
 namespace LikeController.Controllers
 {
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -15,6 +16,7 @@ namespace LikeController.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<LikesModel>> createLike([FromBody] LikeDto like)
         {
             try

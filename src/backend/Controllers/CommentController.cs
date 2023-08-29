@@ -1,6 +1,7 @@
 namespace CommentController.Controllers
 {
     using System.ComponentModel.DataAnnotations;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[controller]")]
@@ -15,6 +16,7 @@ namespace CommentController.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<CommentModel>> createComment([FromBody] CommentDto comment)
         {
             try
@@ -33,6 +35,11 @@ namespace CommentController.Controllers
         [HttpGet("{id}")]
         public ActionResult<CommentModel> listComment([FromRoute] Guid id){
             var listComments = commentService.listComment(id);
+            return Ok(listComments);
+        }
+        [HttpPost("seemore/{id}")]
+        public ActionResult<CommentModel> listCommentSeeMore([FromRoute] Guid id, [FromBody] string date){
+            var listComments = commentService.listCommentSeeMore(id, date);
             return Ok(listComments);
         }
     }

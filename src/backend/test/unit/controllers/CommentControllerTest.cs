@@ -63,11 +63,28 @@ public class CommentControllerTest
 
         var commentController = new Comment(commentServiceMock.Object);
         var userCommentsLinq = new UserCommentsLinq();
-        var listUserComments = new List<UserCommentsLinq>{userCommentsLinq};
+        var listUserComments = new List<UserCommentsLinq> { userCommentsLinq };
         var id = Guid.NewGuid();
         commentServiceMock.Setup(cs => cs.listComment(id)).Returns(listUserComments);
 
         var result = commentController.listComment(id);
+        var okobjectresult = Assert.IsType<ActionResult<CommentModel>>(result);
+        var content = Assert.IsType<OkObjectResult>(okobjectresult.Result).Value;
+
+        Assert.IsType<List<UserCommentsLinq>>(content);
+    }
+    [Fact]
+    public void should_to_return_an_okobjectresult_response_next_comments()
+    {
+        var commentServiceMock = new Mock<ICommentService>();
+
+        var commentController = new Comment(commentServiceMock.Object);
+        var userCommentsLinq = new UserCommentsLinq();
+        var listUserComments = new List<UserCommentsLinq> { userCommentsLinq };
+        var id = Guid.NewGuid();
+        commentServiceMock.Setup(cs => cs.listCommentSeeMore(id, new DateTime().ToString())).Returns(listUserComments);
+
+        var result = commentController.listCommentSeeMore(id, new DateTime().ToString());
         var okobjectresult = Assert.IsType<ActionResult<CommentModel>>(result);
         var content = Assert.IsType<OkObjectResult>(okobjectresult.Result).Value;
 

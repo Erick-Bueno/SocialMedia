@@ -48,4 +48,11 @@ public class CommentService : ICommentService
        var listComment = commentRepository.listComment(idPost);
        return listComment;
     }
+
+    public List<UserCommentsLinq> listCommentSeeMore(Guid idPost, string date)
+    {
+        var dateConverted = DateTime.Parse(date);
+        var listCommentSeeMore = commentRepository.listCommentSeeMore(idPost, dateConverted);
+        return listCommentSeeMore;
+    }
 }

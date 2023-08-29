@@ -205,13 +205,13 @@ public class UserServiceTest
         userModelTest.userName = "erick";
         userModelTest.telephone = "77799591703";
         userModelTest.userPhoto = "llll";
-    
+
         var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object, tokenRepositoryMock.Object, jwtmock.Object);
-         userRepositoryMock
-        .Setup(ur => ur.register(It.IsAny<UserModel>()))
-        .ReturnsAsync(userModelTest);
+        userRepositoryMock
+       .Setup(ur => ur.register(It.IsAny<UserModel>()))
+       .ReturnsAsync(userModelTest);
         var token = "token";
-        jwtmock.Setup(jwt=> jwt.generateJwt(It.IsAny<UserModel>())).Returns(token);
+        jwtmock.Setup(jwt => jwt.generateJwt(It.IsAny<UserModel>())).Returns(token);
         ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", userModelTest.id, token);
         var result = await userService.register(userDto, null);
 
@@ -220,9 +220,62 @@ public class UserServiceTest
         Assert.Equal(result.Id, rp.Id);
         Assert.Equal(result.Status, rp.Status);
         Assert.Equal(result.Message, rp.Message);
-       
+
 
 
 
     }
+    [Fact]
+    public void should_to_list_five_first_user_searched()
+    {
+        var userRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModelTest = new UserModel();
+        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
+        var tokenRepositoryMock = new Mock<ITokenRepository>();
+        var jwtmock = new Mock<Ijwt>();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var userModelTest2 = new SearchUserLinq();
+        var listFiveUsers = new List<SearchUserLinq>{userModelTest2};
+
+        userRepositoryMock.Setup(ur => ur.findFiveFirstUserSearched(userModelTest2.name)).Returns(listFiveUsers);
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object,tokenRepositoryMock.Object, jwtmock.Object);
+
+        var result = userService.findFiveFirstUserSearched(userModelTest2.name);
+        Assert.IsType<List<SearchUserLinq>>(result);
+    }
+    [Fact]
+    public void should_to_list_next_users_searched()
+    {
+           var userRepositoryMock = new Mock<IUserRepository>();
+        UserModel userModelTest = new UserModel();
+        var IWebHostEnvironmentmock = new Mock<IWebHostEnvironment>();
+        var tokenRepositoryMock = new Mock<ITokenRepository>();
+        var jwtmock = new Mock<Ijwt>();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var userModelTest2 = new SearchUserLinq();
+
+        userModelTest2.name = userModelTest.userName;
+        userModelTest2.id = userModelTest.id;
+
+        var listFiveUsers = new List<SearchUserLinq>{userModelTest2};
+
+        userRepositoryMock.Setup(ur => ur.findUserSearchedScrolling(userModelTest.id,userModelTest.userName)).Returns(listFiveUsers);
+        var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object,tokenRepositoryMock.Object, jwtmock.Object);
+
+        var result = userService.findUserSearchedScrolling(userModelTest2.id,userModelTest2.name);
+        Assert.IsType<List<SearchUserLinq>>(result);
+    }
+
 }

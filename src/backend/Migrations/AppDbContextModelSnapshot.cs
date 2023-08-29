@@ -29,6 +29,10 @@ namespace backend.Migrations
                         .HasMaxLength(600)
                         .HasColumnType("varchar(600)");
 
+                    b.Property<DateTime>("dateComment")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("postId")
                         .HasColumnType("char(36)");
 
@@ -120,12 +124,12 @@ namespace backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("totalComments")
+                    b.Property<int>("totalComments")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int?>("totalLikes")
+                    b.Property<int>("totalLikes")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);

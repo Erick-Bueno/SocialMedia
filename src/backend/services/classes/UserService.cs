@@ -95,8 +95,15 @@ public class UserService : IUserService
         var userData = await userRepository.findUser(id);
         return userData;
     }
-
+   
     
-
+    public List<SearchUserLinq> findFiveFirstUserSearched(string name){
+        var listFiveUsers = userRepository.findFiveFirstUserSearched(name);
+        return listFiveUsers;
+    } 
+    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name){
+        var listNextUsersSearched = userRepository.findUserSearchedScrolling(id, name);
+        return listNextUsersSearched;
+    }
 
 }

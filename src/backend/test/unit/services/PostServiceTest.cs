@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using backend.Migrations;
 using Moq;
 using Xunit;
 
@@ -279,7 +280,126 @@ public class PostServiceTest
 
         postRepositoryMock.Setup(pr => pr.listPostsSeeMore(date, userModelTest.id)).Returns(listPostsLinq);
 
-        var result = postService.listPostsSeeMore(date.ToString(),userModelTest.id);
+        var result = postService.listPostsSeeMore(date.ToString(), userModelTest.id);
+
+        Assert.IsType<List<PostsLinq>>(result);
+    }
+    [Fact]
+    public async void should_to_list_next_posts_that_user_likes()
+    {
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var postService = new PostService(postRepositoryMock.Object, IWebHostEnvironmentMock.Object, userRepositoryMock.Object);
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+        List<PostsLikeListLinq> listPostsLinq = new List<PostsLikeListLinq>();
+
+        postRepositoryMock.Setup(pr => pr.listPostsUserLikeSeeMore(userModelTest.id, new DateTime())).Returns(listPostsLinq);
+
+        var result = postService.listPostsUserLikeSeeMore(userModelTest.id, new DateTime().ToString());
+        Assert.IsType<List<PostsLikeListLinq>>(result);
+
+    }
+    [Fact]
+    public void should_to_list_posts_created_by_user()
+    {
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var webHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var postService = new PostService(postRepositoryMock.Object, webHostEnvironmentMock.Object, userRepositoryMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var listPostsUserCreated = new List<PostsLinq>();
+
+        postRepositoryMock.Setup(pr => pr.listPostsUserCreated(userModelTest.id)).Returns(listPostsUserCreated);
+
+        var result = postService.listPostsUserCreated(userModelTest.id);
+
+        Assert.IsType<List<PostsLinq>>(result);
+
+    }
+    [Fact]
+    public void should_to_list_next_posts_created_by_user()
+    {
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var webHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var postService = new PostService(postRepositoryMock.Object, webHostEnvironmentMock.Object, userRepositoryMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var listPostsUserCreated = new List<PostsLinq>();
+
+        postRepositoryMock.Setup(pr => pr.listPostsUserCreatedSeeMore(userModelTest.id, new DateTime())).Returns(listPostsUserCreated);
+
+        var result = postService.listPostsUserCreatedSeeMore(userModelTest.id, new DateTime().ToString());
+
+        Assert.IsType<List<PostsLinq>>(result);
+    }
+    [Fact]
+    public void should_to_list_first_five_posts_searched()
+    {
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var webHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var postService = new PostService(postRepositoryMock.Object, webHostEnvironmentMock.Object, userRepositoryMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var listPostsUsersSearched = new List<PostsLinq>();
+
+        postRepositoryMock.Setup(pr => pr.findFiveFirstPostsSearched("erick", userModelTest.id)).Returns(listPostsUsersSearched);
+
+        var result = postService.findFiveFirstPostsSearched("erick", userModelTest.id);
+
+        Assert.IsType<List<PostsLinq>>(result);
+    }
+    [Fact]
+    public void should_to_list_next_five_posts_searched()
+    {
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var webHostEnvironmentMock = new Mock<IWebHostEnvironment>();
+        var postService = new PostService(postRepositoryMock.Object, webHostEnvironmentMock.Object, userRepositoryMock.Object);
+
+        UserModel userModelTest = new UserModel();
+        userModelTest.id = Guid.NewGuid();
+        userModelTest.email = "erickjb93@gmail.com";
+        userModelTest.password = "Sirlei231";
+        userModelTest.userName = "erick";
+        userModelTest.telephone = "77799591703";
+        userModelTest.userPhoto = "llll";
+
+        var listPostsUsersSearched = new List<PostsLinq>();
+        var date = new DateTime();
+        postRepositoryMock.Setup(pr => pr.findPostsSearchedScrolling( date, "erick",userModelTest.id)).Returns(listPostsUsersSearched);
+
+        var result = postService.findPostsSearchedScrolling(userModelTest.id, date.ToString(), "erick");
 
         Assert.IsType<List<PostsLinq>>(result);
     }

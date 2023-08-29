@@ -8,5 +8,11 @@ public interface IPostRepository
     public List<PostsLinq> listPosts(Guid id);
     public List<PostsLikeListLinq> listPostsUserLike(Guid id);
     public List<PostsLinq> listPostsSeeMore(DateTime data, Guid id);
+    public List<PostsLikeListLinq> listPostsUserLikeSeeMore(Guid id, DateTime date);
+    public List<PostsLinq> listPostsUserCreated(Guid id);
+    public List<PostsLinq> listPostsUserCreatedSeeMore(Guid id, DateTime date);
+    public List<PostsLinq> findFiveFirstPostsSearched(string name, Guid? userId);  
+    public List<PostsLinq> findPostsSearchedScrolling(DateTime date, string name, Guid? userId);
+
     
 }

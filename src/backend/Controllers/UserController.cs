@@ -2,6 +2,7 @@ namespace User.Controllers
 {
     using System.ComponentModel.DataAnnotations;
     using System.Data.Common;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +42,7 @@ namespace User.Controllers
 
         }
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<UserModel>> findUser([FromRoute] Guid id)
         {
             try
@@ -57,5 +59,20 @@ namespace User.Controllers
             }
 
         }
+        [HttpGet("search/{name}")]
+
+        public ActionResult<List<UserModel>> findFiveFirstUserSearched([FromRoute] string name){
+            var listFirstFiveUsers = userService.findFiveFirstUserSearched(name);
+           
+
+            return Ok(listFirstFiveUsers);
+        }
+        [HttpPost("search")]
+     
+        public ActionResult<List<UserModel>> findUserSearchedScrolling([FromBody] ListNextUsersSearchedDto listNextUsers){
+            var listNextUsersSearched = userService.findUserSearchedScrolling(listNextUsers.id, listNextUsers.name );
+            return Ok(listNextUsersSearched);
+        }
+      
     }
 }

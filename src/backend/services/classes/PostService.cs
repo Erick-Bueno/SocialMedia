@@ -102,4 +102,35 @@ public class PostService : IPostService
        var listPostsSeeMore = postRepository.listPostsSeeMore(convertedData,id);
        return listPostsSeeMore;
     }
+
+    public List<PostsLikeListLinq> listPostsUserLikeSeeMore(Guid id, string date)
+    {
+        var dateConverted = DateTime.Parse(date);
+        var listPostsUserLikeSeeMore = postRepository.listPostsUserLikeSeeMore(id,dateConverted);
+        return listPostsUserLikeSeeMore;
+    }
+    public List<PostsLinq> listPostsUserCreated(Guid id){
+        var listUserPosts = postRepository.listPostsUserCreated(id);
+        return listUserPosts;
+    }
+
+    public List<PostsLinq> listPostsUserCreatedSeeMore(Guid id, string date)
+    {
+        var dateConverted = DateTime.Parse(date);
+        var listPostsUserCreatedSeeMore = postRepository.listPostsUserCreatedSeeMore(id, dateConverted);   
+        return  listPostsUserCreatedSeeMore;                                                                 
+    }
+
+    public List<PostsLinq> findFiveFirstPostsSearched(string name, Guid? userId)
+    {
+        var firstFivePosts = postRepository.findFiveFirstPostsSearched(name, userId );
+        return firstFivePosts;
+    }
+
+    public List<PostsLinq> findPostsSearchedScrolling(Guid? userId, string date, string name)
+    {
+        var dateConverted= DateTime.Parse(date);
+        var listPostsSearched = postRepository.findPostsSearchedScrolling(dateConverted, name, userId);
+        return listPostsSearched;
+    }
 }

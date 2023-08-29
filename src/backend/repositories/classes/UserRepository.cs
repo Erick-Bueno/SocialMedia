@@ -44,4 +44,27 @@ public class UserRepository : IUserRepository
         return userRegistred;
     }
 
+    public List<SearchUserLinq> findFiveFirstUserSearched(string name)
+    {
+        var listUsers = _context.Users.Where(u => u.userName.Contains(name)).Take(5).OrderByDescending(u => u.id).Select(u => new SearchUserLinq
+        {
+            name = u.userName,
+            photo = u.userPhoto,
+            email = u.email,
+            id = u.id
+        }).ToList();
+        return listUsers;
+    }
+    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name)
+    {
+        var listNextUsers = _context.Users.Where(u => u.userName.Contains(name) && u.id.CompareTo(id) < 0).OrderByDescending(u => u.id).Take(5).Select(u => new SearchUserLinq
+        {
+            name = u.userName,
+            photo = u.userPhoto,
+            email = u.email,
+            id = u.id
+        }).ToList();
+        return listNextUsers;
+    }
+
 }

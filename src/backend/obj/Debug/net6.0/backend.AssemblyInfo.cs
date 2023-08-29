@@ -17,6 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyProductAttribute("backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("IntegrationTests")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
 

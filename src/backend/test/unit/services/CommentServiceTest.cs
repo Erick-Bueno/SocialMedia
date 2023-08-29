@@ -126,4 +126,28 @@ public class CommentServiceTest
         var result = CommentService.listComment(CommentModel.postId);
         Assert.IsType<List<UserCommentsLinq>>(result);
     } 
+    [Fact]
+    public void should_to_list_next_comments()
+    {
+         var CommentRepositoryMock = new Mock<ICommentRepository>();
+        var postRepositoryMock = new Mock<IPostRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+        var CommentService = new CommentService(CommentRepositoryMock.Object, postRepositoryMock.Object, userRepositoryMock.Object);
+        
+        var CommentModel = new CommentModel();
+        CommentModel.userId = Guid.NewGuid();
+        CommentModel.comment = "teste";
+        CommentModel.id = Guid.NewGuid();
+        CommentModel.postId = Guid.NewGuid();
+
+        var userCommentsLinq = new UserCommentsLinq();
+        
+
+        var listComments = new List<UserCommentsLinq>{userCommentsLinq};
+
+        CommentRepositoryMock.Setup(cp => cp.listCommentSeeMore(CommentModel.postId, new DateTime())).Returns(listComments);
+
+        var result = CommentService.listCommentSeeMore(CommentModel.postId,new DateTime().ToString());
+        Assert.IsType<List<UserCommentsLinq>>(result);
+    }
 }
