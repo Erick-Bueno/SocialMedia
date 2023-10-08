@@ -108,13 +108,12 @@ public class AuthServiceTest
 
 
         authRepositoryMock.Setup(ar => ar.searchingForEmail(loginData)).Returns(userModelTest);
-        authRepositoryMock.Setup(ar => ar.loggedInBeffore(loginData.email)).Returns((TokenModel)null);
         tokenRepositoryMock.Setup(tk => tk.addUserToken(token)).ReturnsAsync(token);
         bcrypt.Setup(bc => bc.verify(loginData.senha, userModelTest.password)).Returns(true);
 
         var Result = await authService.login(loginData);
 
-        ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", userModelTest.id, "tokenteste");
+        ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", "tokenteste");
 
         Assert.IsType<ResponseRegister>(Result);
 
@@ -155,13 +154,12 @@ public class AuthServiceTest
 
 
         authRepositoryMock.Setup(ar => ar.searchingForEmail(loginData)).Returns(userModelTest);
-        authRepositoryMock.Setup(ar => ar.loggedInBeffore(loginData.email)).Returns(token);
         tokenRepositoryMock.Setup(tk => tk.updateToken(token, newJwt)).ReturnsAsync(token);
         bcrypt.Setup(bc => bc.verify(loginData.senha, userModelTest.password)).Returns(true);
 
         var result = await AuthService.login(loginData);
 
-        ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", userModelTest.id, "tokenteste");
+        ResponseRegister responseSucess = new ResponseRegister(200, "Úsuario logado com sucesso", "tokenteste");
 
         Assert.IsType<ResponseRegister>(result);
 
@@ -182,7 +180,7 @@ public class AuthServiceTest
         token.id = Guid.NewGuid();
         token.jwt = "jwtteste";
 
-        authRepositoryMock.Setup(ap => ap.findUserEmailWithToken(token.jwt.ToString())).Returns(Task.FromResult<TokenModel>(null));
+        tokenRepositoryMock.Setup(ap => ap.findUserEmailWithToken(token.jwt.ToString())).Returns((TokenModel)null);
 
 
 
@@ -211,7 +209,7 @@ public class AuthServiceTest
         userModelTest.telephone = "77799591703";
         userModelTest.userPhoto = "llll";
 
-        authRepositoryMock.Setup(ap => ap.findUserEmailWithToken(token.jwt.ToString())).ReturnsAsync(token);
+        tokenRepositoryMock.Setup(ap => ap.findUserEmailWithToken(token.jwt.ToString())).Returns(token);
 
         userRepositoryMock.Setup(ur => ur.userRegistred(token.email)).Returns(userModelTest);
 

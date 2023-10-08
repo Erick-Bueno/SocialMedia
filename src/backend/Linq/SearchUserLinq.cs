@@ -4,5 +4,6 @@ public class SearchUserLinq
     public string photo { get; set; }
     public string email { get; set; }
     public Guid id { get; set; }
+    public bool isFriends { get; set; }
 
 }

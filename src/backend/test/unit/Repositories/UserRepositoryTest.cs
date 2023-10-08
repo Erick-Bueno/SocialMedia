@@ -179,7 +179,7 @@ public class UserRepositoryTest
 
         appDbContextMock.Setup(db => db.Users).Returns(dbSetUserMock.Object);
 
-        var result = userRepository.findFiveFirstUserSearched(userModelTest.userName);
+        var result = userRepository.findFiveFirstUserSearched(userModelTest.userName, userModelTest.id);
 
         Assert.IsType<List<SearchUserLinq>>(result);
     }
@@ -212,7 +212,7 @@ public class UserRepositoryTest
 
         appDbContextMock.Setup(db => db.Users).Returns(dbSetUserMock.Object);
 
-        var result = userRepository.findUserSearchedScrolling(userModelTest.id ,userModelTest.userName);
+        var result = userRepository.findUserSearchedScrolling(userModelTest.id ,userModelTest.userName,userModelTest.id);
 
         Assert.IsType<List<SearchUserLinq>>(result);
     }

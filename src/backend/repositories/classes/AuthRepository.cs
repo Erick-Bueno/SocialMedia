@@ -7,17 +7,6 @@ public class AuthRepository : IAuthRepository
         _context = context;
     }
 
-    public async Task<TokenModel> findUserEmailWithToken(string jwt)
-    {
-        var tokenRegister =  _context.Token.Where(tk => tk.jwt == jwt).FirstOrDefault();
-        return tokenRegister;
-    }
-
-    public TokenModel loggedInBeffore(string email)
-    {
-        var findUserLogged = _context.Token.Where(tk => tk.email == email).FirstOrDefault();
-        return findUserLogged;
-    }
 
     public UserModel searchingForEmail(UserLoginDto loginData)
     {

@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using Moq;
 using Xunit;
@@ -212,12 +213,11 @@ public class UserServiceTest
        .ReturnsAsync(userModelTest);
         var token = "token";
         jwtmock.Setup(jwt => jwt.generateJwt(It.IsAny<UserModel>())).Returns(token);
-        ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", userModelTest.id, token);
+        ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", token);
         var result = await userService.register(userDto, null);
 
         Assert.IsType<ResponseRegister>(result);
         Assert.Equal(result.Jwt, rp.Jwt);
-        Assert.Equal(result.Id, rp.Id);
         Assert.Equal(result.Status, rp.Status);
         Assert.Equal(result.Message, rp.Message);
 
@@ -243,10 +243,10 @@ public class UserServiceTest
         var userModelTest2 = new SearchUserLinq();
         var listFiveUsers = new List<SearchUserLinq>{userModelTest2};
 
-        userRepositoryMock.Setup(ur => ur.findFiveFirstUserSearched(userModelTest2.name)).Returns(listFiveUsers);
+        userRepositoryMock.Setup(ur => ur.findFiveFirstUserSearched(userModelTest2.name, userModelTest.id)).Returns(listFiveUsers);
         var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object,tokenRepositoryMock.Object, jwtmock.Object);
 
-        var result = userService.findFiveFirstUserSearched(userModelTest2.name);
+        var result = userService.findFiveFirstUserSearched(userModelTest2.name,userModelTest.id);
         Assert.IsType<List<SearchUserLinq>>(result);
     }
     [Fact]
@@ -271,10 +271,10 @@ public class UserServiceTest
 
         var listFiveUsers = new List<SearchUserLinq>{userModelTest2};
 
-        userRepositoryMock.Setup(ur => ur.findUserSearchedScrolling(userModelTest.id,userModelTest.userName)).Returns(listFiveUsers);
+        userRepositoryMock.Setup(ur => ur.findUserSearchedScrolling(userModelTest.id,userModelTest.userName,userModelTest.id)).Returns(listFiveUsers);
         var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentmock.Object,tokenRepositoryMock.Object, jwtmock.Object);
 
-        var result = userService.findUserSearchedScrolling(userModelTest2.id,userModelTest2.name);
+        var result = userService.findUserSearchedScrolling(userModelTest2.id,userModelTest2.name, userModelTest.id);
         Assert.IsType<List<SearchUserLinq>>(result);
     }
 

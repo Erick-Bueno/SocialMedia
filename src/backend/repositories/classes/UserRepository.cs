@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Data.Common;
+using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
 
@@ -44,27 +45,29 @@ public class UserRepository : IUserRepository
         return userRegistred;
     }
 
-    public List<SearchUserLinq> findFiveFirstUserSearched(string name)
+    public List<SearchUserLinq> findFiveFirstUserSearched(string name, Guid? id)
     {
-        var listUsers = _context.Users.Where(u => u.userName.Contains(name)).Take(5).OrderByDescending(u => u.id).Select(u => new SearchUserLinq
+        var listUsers = _context.Users.Where(u => u.userName.Contains(name) && u.id != id).Take(5).OrderByDescending(u => u.id).Select(u => new SearchUserLinq
         {
             name = u.userName,
             photo = u.userPhoto,
             email = u.email,
-            id = u.id
+            id = u.id,
+            isFriends = _context.Friends.Any(f => ((f.userId == u.id && f.userId2 == id) || (f.userId == id && f.userId2 == u.id))) 
         }).ToList();
         return listUsers;
     }
-    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name)
+    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name, Guid? userId)
     {
-        var listNextUsers = _context.Users.Where(u => u.userName.Contains(name) && u.id.CompareTo(id) < 0).OrderByDescending(u => u.id).Take(5).Select(u => new SearchUserLinq
+         var listUsersNext = _context.Users.Where(u => u.userName.Contains(name) && u.id != userId && u.id.CompareTo(id) < 0).Take(5).OrderByDescending(u => u.id).Select(u => new SearchUserLinq
         {
             name = u.userName,
             photo = u.userPhoto,
             email = u.email,
-            id = u.id
+            id = u.id,
+            isFriends = _context.Friends.Any(f => ((f.userId == u.id && f.userId2 == userId) || (f.userId == userId && f.userId2 == u.id))) 
         }).ToList();
-        return listNextUsers;
+        return listUsersNext;
     }
 
 }

@@ -39,9 +39,21 @@ public class RequestService : IRequestService
         return requests;
     }
 
+    public bool deleteRequest(RequestDto requestDto)
+    {
+        var deleteRequest = requestRepository.deleteRequest(requestDto.receiverId, requestDto.requesterId);
+        return deleteRequest;
+    }
+
     public RequestsModel findRequest(Guid receiverId, Guid requesterId)
     {
         var requestData = requestRepository.findRequest(receiverId, requesterId);
         return requestData;
+    }
+
+    public List<RequestsListLinq> listRequests(Guid userId)
+    {
+        var listRequests = requestRepository.listRequest(userId);
+        return listRequests;
     }
 }

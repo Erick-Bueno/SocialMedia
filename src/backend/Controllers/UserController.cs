@@ -59,10 +59,10 @@ namespace User.Controllers
             }
 
         }
-        [HttpGet("search/{name}")]
+        [HttpGet("search/{name}/{id?}")]
 
-        public ActionResult<List<UserModel>> findFiveFirstUserSearched([FromRoute] string name){
-            var listFirstFiveUsers = userService.findFiveFirstUserSearched(name);
+        public ActionResult<List<UserModel>> findFiveFirstUserSearched([FromRoute] string name,[FromRoute] Guid? id){
+            var listFirstFiveUsers = userService.findFiveFirstUserSearched(name, id);
            
 
             return Ok(listFirstFiveUsers);
@@ -70,7 +70,7 @@ namespace User.Controllers
         [HttpPost("search")]
      
         public ActionResult<List<UserModel>> findUserSearchedScrolling([FromBody] ListNextUsersSearchedDto listNextUsers){
-            var listNextUsersSearched = userService.findUserSearchedScrolling(listNextUsers.id, listNextUsers.name );
+            var listNextUsersSearched = userService.findUserSearchedScrolling(listNextUsers.id, listNextUsers.name, listNextUsers.userId );
             return Ok(listNextUsersSearched);
         }
       

@@ -4,8 +4,8 @@ public interface IUserService
     public UserModel convertUserDtoToUserModel(UserRegisterDto userDto, string url);
     public Task saveUserPhoto(string img, IFormFile imgfile);
     public Task<UserModel> findUser(Guid id);
-    public List<SearchUserLinq> findFiveFirstUserSearched(string name);  
-    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name);
+    public List<SearchUserLinq> findFiveFirstUserSearched(string name,Guid? id);  
+    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name, Guid? userId);
 
     
 }

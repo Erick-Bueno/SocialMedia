@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Moq;
+using Sprache;
 using Xunit;
 
 public class RequestServiceTest
@@ -46,7 +47,7 @@ public class RequestServiceTest
         requestsModel.receiverId = requestDto.receiverId;
         requestsModel.requesterId = requestDto.requesterId;
         requestsModel.status = requestDto.status;
-        
+
         userRepositoryMock.Setup(ur => ur.findUser(requestsModel.receiverId)).ReturnsAsync(userModel);
         userRepositoryMock.Setup(ur => ur.findUser(requestsModel.requesterId)).ReturnsAsync(userModel);
         requestRepositorymock.Setup(rp => rp.findRequest(requestDto.receiverId, requestDto.requesterId)).Returns((RequestsModel)null);
@@ -110,7 +111,7 @@ public class RequestServiceTest
         Assert.Equal(result, requestsModel);
     }
     [Fact]
-      async public void Add_request_exception_requester_or_receiver_ids_is_null()
+    async public void Add_request_exception_requester_or_receiver_ids_is_null()
     {
         var requestRepositorymock = new Mock<IRequestRepository>();
         var userRepositoryMock = new Mock<IUserRepository>();
@@ -130,10 +131,54 @@ public class RequestServiceTest
 
         requestRepositorymock.Setup(rp => rp.findRequest(requestDto.receiverId, requestDto.requesterId)).Returns(requestsModel);
 
- 
+
         var requestService = new RequestService(requestRepositorymock.Object, userRepositoryMock.Object);
         var result = await requestService.addRequest(requestDto);
         Assert.False(result);
+    }
+    [Fact]
+    public void should_to_list_user_requests()
+    {
+        var requestRepositorymock = new Mock<IRequestRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+
+        RequestDto requestDto = new RequestDto();
+        requestDto.receiverId = Guid.NewGuid();
+        requestDto.requesterId = Guid.NewGuid();
+        requestDto.status = StatusEnum.pending;
+
+        RequestsModel requestsModel = new RequestsModel();
+        requestsModel.receiverId = requestDto.receiverId;
+        requestsModel.requesterId = requestDto.requesterId;
+        requestsModel.status = requestDto.status;
+        UserModel userModel = new UserModel();
+        var listRequests = new List<RequestsListLinq>();
+        requestRepositorymock.Setup(rp => rp.listRequest(requestDto.receiverId)).Returns(listRequests);
+
+
+        var requestService = new RequestService(requestRepositorymock.Object, userRepositoryMock.Object);
+        var result = requestService.listRequests(requestDto.receiverId);
+
+    }
+    [Fact]
+    public void should_to_delete_request()
+    {
+        var requestRepositoryMock = new Mock<IRequestRepository>();
+        var userRepositoryMock = new Mock<IUserRepository>();
+
+        var requestDto = new RequestDto();
+
+        requestDto.receiverId = Guid.NewGuid();
+        requestDto.requesterId = Guid.NewGuid();
+
+
+        requestRepositoryMock.Setup(rr => rr.deleteRequest(requestDto.receiverId,requestDto.requesterId)).Returns(true);
+
+        var requestService = new RequestService(requestRepositoryMock.Object, userRepositoryMock.Object);
+
+        var result = requestService.deleteRequest(requestDto);
+
+        Assert.True(result);
     }
 
 }

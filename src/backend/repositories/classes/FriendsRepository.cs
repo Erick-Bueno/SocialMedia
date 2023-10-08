@@ -9,14 +9,17 @@ public class FriendsRepository : IFriendsRepository
 
     public async Task<FriendsModel> addFriends(FriendsModel friends)
     {
-        var newFriend = await _context.Friends.AddAsync(friends);
-        await _context.SaveChangesAsync();
-        return friends;
+  
+
+            var newFriend = await _context.Friends.AddAsync(friends);
+            await _context.SaveChangesAsync();
+            return friends;
+
     }
 
     public FriendsModel checkIfAreFriends(Guid receiverId, Guid requesterId)
     {
-        var areFriends = _context.Friends.Where(f => (f.userId == requesterId && f.userId2 == receiverId) || (f.userId == receiverId && f.userId2 == requesterId) ).FirstOrDefault();
+        var areFriends = _context.Friends.Where(f => (f.userId == requesterId && f.userId2 == receiverId) || (f.userId == receiverId && f.userId2 == requesterId)).FirstOrDefault();
         return areFriends;
     }
 
@@ -29,11 +32,14 @@ public class FriendsRepository : IFriendsRepository
 
     public List<UserFriendsListLinq> listUserFriends(Guid id)
     {
-        var query = (from friend in _context.Friends join user in _context.Users on (friend.userId == id ? friend.userId2 : friend.userId) equals user.id where friend.userId == id || friend.userId2 == id
-        select new UserFriendsListLinq{
-            nome = user.userName,
-            email = user.email
-        }).ToList();
+        var query = (from friend in _context.Friends
+                     join user in _context.Users on (friend.userId == id ? friend.userId2 : friend.userId) equals user.id
+                     where friend.userId == id || friend.userId2 == id
+                     select new UserFriendsListLinq
+                     {
+                         nome = user.userName,
+                         email = user.email
+                     }).Distinct().ToList();
         return query;
     }
 }

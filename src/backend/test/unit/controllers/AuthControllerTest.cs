@@ -12,7 +12,7 @@ public class AuthControllerTest
       UserLoginDto loginData = new UserLoginDto();
       loginData.email = "erickjb93@gmail.com";
       loginData.senha = "sirlei231";
-      ResponseRegister response = new ResponseRegister(200, "Usuário logado com sucesso",Guid.NewGuid(),"jwtTeste");
+      ResponseRegister response = new ResponseRegister(200, "Usuário logado com sucesso","jwtTeste");
       authServiceMock.Setup(au => au.login(loginData)).ReturnsAsync(response);
 
       var Auth = new Auth(authServiceMock.Object);
@@ -32,7 +32,7 @@ public class AuthControllerTest
       UserLoginDto loginData = new UserLoginDto();
       loginData.email = "erickjb93@gmail.com";
       loginData.senha = "sirlei231";
-      ResponseRegister response = new ResponseRegister(200, "Usuário logado com sucesso",Guid.NewGuid(),"jwtTeste");
+      ResponseRegister response = new ResponseRegister(200, "Usuário logado com sucesso","jwtTeste");
       authServiceMock.Setup(au => au.login(loginData)).ReturnsAsync(response);
 
       var AuthController = new Auth(authServiceMock.Object);

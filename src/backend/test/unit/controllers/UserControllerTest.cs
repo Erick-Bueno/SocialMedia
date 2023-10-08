@@ -36,7 +36,7 @@ public class UserControllerTest
 
         var userController = new UserController(userServiceMock.Object, friendsServiceMock.Object);
 
-        ResponseRegister responseTest = new ResponseRegister(200, "usuario cadastrado", Guid.NewGuid(), "testejwt");
+        ResponseRegister responseTest = new ResponseRegister(200, "usuario cadastrado", "testejwt");
 
         userServiceMock.Setup(us => us.register(userDto, userDto.userImageFile)).ReturnsAsync(responseTest);
 
@@ -56,7 +56,7 @@ public class UserControllerTest
 
         var userController = new UserController(userServiceMock.Object, friendsServiceMock.Object);
 
-        ResponseRegister responseRegisterTest = new ResponseRegister(200, "usuario cadastrado", Guid.NewGuid(), "testejwt");
+        ResponseRegister responseRegisterTest = new ResponseRegister(200, "usuario cadastrado", "testejwt");
 
         userServiceMock.Setup(us => us.register(userDto, userDto.userImageFile)).ReturnsAsync(responseRegisterTest);
 
@@ -121,11 +121,11 @@ public class UserControllerTest
          
      
 
-        userServiceMock.Setup(us => us.findFiveFirstUserSearched(userModelTest2.name)).Returns(listFirstFiveUsers);
+        userServiceMock.Setup(us => us.findFiveFirstUserSearched(userModelTest2.name, userModeltest.id)).Returns(listFirstFiveUsers);
 
 
 
-        var result = userController.findFiveFirstUserSearched(userModelTest2.name);
+        var result = userController.findFiveFirstUserSearched(userModelTest2.name,  userModeltest.id);
 
         var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
         
@@ -154,12 +154,13 @@ public class UserControllerTest
         var UserSearchDto = new ListNextUsersSearchedDto();
         UserSearchDto.name = userModeltest.userName;
         UserSearchDto.id = userModeltest.id;
+        UserSearchDto.userId = userModeltest.id;
 
         var userModelTest2 = new SearchUserLinq();
         userModelTest2.name = userModeltest.userName;
         userModelTest2.id = userModeltest.id;
         var listFirstFiveUsers = new List<SearchUserLinq>{userModelTest2};
-        userServiceMock.Setup(us => us.findUserSearchedScrolling(UserSearchDto.id,UserSearchDto.name )).Returns(listFirstFiveUsers);
+        userServiceMock.Setup(us => us.findUserSearchedScrolling(UserSearchDto.id,UserSearchDto.name, UserSearchDto.userId )).Returns(listFirstFiveUsers);
 
 
 

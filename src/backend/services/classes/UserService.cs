@@ -54,9 +54,9 @@ public class UserService : IUserService
         var addToken = await tokenRepository.addUserToken(tokenmodel);
 
 
-        ResponseRegister rp = new ResponseRegister(200, "usuario cadastrado", userRegistered.id, token);
+        ResponseRegister responseSucess = new ResponseRegister(200, "usuario cadastrado", token);
         //adicionar imagem em pasta na web e criar se n existir
-        return rp;
+        return responseSucess;
 
 
 
@@ -97,12 +97,12 @@ public class UserService : IUserService
     }
    
     
-    public List<SearchUserLinq> findFiveFirstUserSearched(string name){
-        var listFiveUsers = userRepository.findFiveFirstUserSearched(name);
+    public List<SearchUserLinq> findFiveFirstUserSearched(string name, Guid? id){
+        var listFiveUsers = userRepository.findFiveFirstUserSearched(name, id);
         return listFiveUsers;
     } 
-    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name){
-        var listNextUsersSearched = userRepository.findUserSearchedScrolling(id, name);
+    public List<SearchUserLinq> findUserSearchedScrolling(Guid id, string name,Guid? userId){
+        var listNextUsersSearched = userRepository.findUserSearchedScrolling(id, name, userId);
         return listNextUsersSearched;
     }
 
