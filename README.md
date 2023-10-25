@@ -30,7 +30,7 @@ Para configurar o banco de dados, siga os passos abaixo:
 
 2. Execute as migrações do Entity Framework para criar as tabelas no banco de dados.
 
-<h1>Database Modeling</h1>
+<h1>Modelagem do banco de dados</h1>
 
 ![Untitled (1)](https://github.com/Erick-Bueno/SocialMedia/assets/101439440/9f74d676-c2ba-4e66-b69c-f1e1de6fe5f4)
 
