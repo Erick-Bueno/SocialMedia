@@ -50,7 +50,7 @@ Este projeto é licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICE
 
 ## Contato
 
-Se você tiver alguma dúvida, sugestão ou desejar contribuir, entre em contato conosco através do email [seu-email@example.com] ou abrindo uma issue neste repositório.
+Se você tiver alguma dúvida, sugestão ou desejar contribuir, entre em contato conosco através do email erickjb93@gmail.com ou abrindo uma issue neste repositório.
 
 Esperamos que este projeto de rede social em desenvolvimento se torne uma plataforma incrível com a ajuda de nossa comunidade de desenvolvedores. Obrigado por seu interesse e suporte!
 
