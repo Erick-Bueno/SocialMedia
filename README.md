@@ -30,6 +30,10 @@ Para configurar o banco de dados, siga os passos abaixo:
 
 2. Execute as migrações do Entity Framework para criar as tabelas no banco de dados.
 
+<h1>Database Modeling</h1>
+
+![Untitled (1)](https://github.com/Erick-Bueno/SocialMedia/assets/101439440/9f74d676-c2ba-4e66-b69c-f1e1de6fe5f4)
+
 ## Executando o Projeto
 
 - Para executar o backend, abra o projeto em sua IDE e execute a aplicação.
@@ -50,8 +54,5 @@ Se você tiver alguma dúvida, sugestão ou desejar contribuir, entre em contato
 
 Esperamos que este projeto de rede social em desenvolvimento se torne uma plataforma incrível com a ajuda de nossa comunidade de desenvolvedores. Obrigado por seu interesse e suporte!
 
-<h1>Database Modeling</h1>
-
-![Untitled (1)](https://github.com/Erick-Bueno/SocialMedia/assets/101439440/9f74d676-c2ba-4e66-b69c-f1e1de6fe5f4)
 
 
