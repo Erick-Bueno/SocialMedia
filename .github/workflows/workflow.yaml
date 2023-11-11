@@ -1,0 +1,20 @@
+name: Continuous Integration
+
+on: pull_request
+
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: using .net
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: run, build and test
+        run: |
+          cd src/backend
+          dotnet restore
+          dotnet build
+          dotnet test
