@@ -15,6 +15,7 @@ jobs:
       - name: run, build and test
         run: |
           cd src/backend
+          dotnet clean
           dotnet restore
           dotnet build
           dotnet test
