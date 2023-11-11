@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: using .net
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.401
+          dotnet-version: 6.0.x
       - name: run, build and test
         run: |
           cd src/backend
