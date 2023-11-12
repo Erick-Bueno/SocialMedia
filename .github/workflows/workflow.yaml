@@ -11,10 +11,10 @@ jobs:
       - name: using .net
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 6.0.401
       - name: run, build and test
         run: |
           cd src/backend
           dotnet restore
           dotnet build
-          dotnet test
+          dotnet test --verbosity detailed
