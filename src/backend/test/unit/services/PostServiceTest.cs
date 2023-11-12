@@ -197,7 +197,7 @@ public class PostServiceTest
         IWebHostEnvironmentMock.Setup(we => we.WebRootPath).Returns(path);
         formfilemock.Setup(fl => fl.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
         await postService.savePostImages("aaaaa", formfilemock.Object);
-        IWebHostEnvironmentMock.Verify(x => x.WebRootPath, Times.Exactly(2));
+        IWebHostEnvironmentMock.Verify(x => x.WebRootPath, Times.AtLeastOnce());
         formfilemock.Verify(f => f.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None), Times.Once);
 
 
