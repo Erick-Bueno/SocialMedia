@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.8.0, )"
+            },
             "Moq": {
               "target": "Package",
               "version": "[4.16.1, )"
