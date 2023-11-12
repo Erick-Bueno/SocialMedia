@@ -191,11 +191,13 @@ public class PostServiceTest
         var postService = new PostService(postRepositoryMock.Object, IWebHostEnvironmentMock.Object, userRepositoryMock.Object);
         var formfilemock = new Mock<IFormFile>();
         var streamMemory = new MemoryStream();
-        IWebHostEnvironmentMock.Setup(we => we.WebRootPath).Returns("C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot");
+        string pathRoot = AppDomain.CurrentDomain.BaseDirectory;
+        string relativePath = Path.Combine(pathRoot, "src", "backend", "wwwroot", "PostsImages");
+        IWebHostEnvironmentMock.Setup(we => we.WebRootPath).Returns(relativePath);
         formfilemock.Setup(fl => fl.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
         var imgname = "aaaaa.png";
         postService.savePostImages(imgname, formfilemock.Object);
-        Assert.True(Directory.Exists($"C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages"));
+        Assert.True(Directory.Exists(relativePath));
 
 
     }

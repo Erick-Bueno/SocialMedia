@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2qg22fzu3Faie+hULDl7Imtgu9HJLTZFJ6sJ+V65FLI=",
+  "Hash": "kNYGC8VISRDhFPyP3AYGOBR0QLcqFmcT4TR7LfeELOI=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -119,6 +119,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\01e2b6d6-67b4-47c1-a992-affe5d9cbc9e_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\01fc028e-d17a-4e09-9cf5-dc143ae4195c_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/01fc028e-d17a-4e09-9cf5-dc143ae4195c_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\01fc028e-d17a-4e09-9cf5-dc143ae4195c_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\022be3eb-074a-4fa6-ad46-03c4fd432602_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -219,6 +236,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\02d79d27-4ad7-4069-8c6a-43e0530d0883_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\02f2312b-13ea-4b63-8756-67eeae1c688c_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/02f2312b-13ea-4b63-8756-67eeae1c688c_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\02f2312b-13ea-4b63-8756-67eeae1c688c_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\0314402a-9fda-4c5d-a290-8ea1620952f8_postimg.png",
@@ -1698,6 +1732,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\1684958c-09bc-47cf-a4ce-c51dcb2cfd67_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\1695c47d-3b81-4f4a-b0e2-b49d5b22e58e_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/1695c47d-3b81-4f4a-b0e2-b49d5b22e58e_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\1695c47d-3b81-4f4a-b0e2-b49d5b22e58e_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\17488343-7646-4ee0-9077-b61cf51dcc8b_postimg.png",
@@ -3772,6 +3823,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\332b5789-48c9-448d-baee-45be36c02ced_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\335672f5-2877-4512-bac9-376daea4dd35_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/335672f5-2877-4512-bac9-376daea4dd35_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\335672f5-2877-4512-bac9-376daea4dd35_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\337e9cd0-6000-46e9-ac37-7e66506f651d_postimg.png",
@@ -6086,6 +6154,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\558ea418-11f3-441b-bdd6-019a53a06ba3_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\55afcbf4-6c03-456d-bf49-4979bfe26921_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/55afcbf4-6c03-456d-bf49-4979bfe26921_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\55afcbf4-6c03-456d-bf49-4979bfe26921_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\55d8dcb9-f2f2-405d-93f6-7a297b4229d5_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -7359,6 +7444,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\6add8888-d3ff-4ad7-a8e3-e54fb78201cc_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\6afacbcb-51ae-46d0-a024-cb22d308239b_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/6afacbcb-51ae-46d0-a024-cb22d308239b_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\6afacbcb-51ae-46d0-a024-cb22d308239b_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\6b0b82a7-6f04-4189-83d9-b11a889596f6_postimg.png",
@@ -8874,6 +8976,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\7d667233-494b-4e6e-b1e2-53d247bc7cfd_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\7db4e9ad-6497-4d12-8072-e1ea68ad586b_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/7db4e9ad-6497-4d12-8072-e1ea68ad586b_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\7db4e9ad-6497-4d12-8072-e1ea68ad586b_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\7e7a4fbc-0e3c-4fbf-87b9-40eda800339e_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -9161,6 +9280,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\8241d710-fc22-48f3-8442-5c673abefabe_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\82926ed2-3363-4b13-925f-dda62af60f52_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/82926ed2-3363-4b13-925f-dda62af60f52_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\82926ed2-3363-4b13-925f-dda62af60f52_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\8299b28b-7adc-40c0-a70f-c7287abb8c25_postimg.png",
@@ -9724,6 +9860,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\8aa9de18-f884-45b8-a5f6-54c4153ca02d_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\8aad385f-67d9-4b69-949d-78e470831bfb_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/8aad385f-67d9-4b69-949d-78e470831bfb_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\8aad385f-67d9-4b69-949d-78e470831bfb_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\8ad230c0-8269-49c1-b57d-54e031b8092c_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -9994,6 +10147,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\8f7971b5-80a1-4cf7-8ec0-086e08f0f4d8_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\8f7b1d88-879c-433b-aa6c-d99904ed24aa_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/8f7b1d88-879c-433b-aa6c-d99904ed24aa_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\8f7b1d88-879c-433b-aa6c-d99904ed24aa_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\8f93a1f4-cdcf-41f7-9ee1-e9cbd3de8c2b_postimg.png",
@@ -11271,6 +11441,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\a71afe2e-f933-47bc-a51e-0e7c3eb5069a_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\a7dd2675-c0dc-4b76-9a2e-2f6110e17483_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/a7dd2675-c0dc-4b76-9a2e-2f6110e17483_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\a7dd2675-c0dc-4b76-9a2e-2f6110e17483_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\a8fba55d-4331-449b-9649-f3b07f09f782_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -12391,6 +12578,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\b68d45f3-efe8-4894-bbd6-9994be384d11_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\b6957711-1537-439a-8193-d0f247c02df3_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/b6957711-1537-439a-8193-d0f247c02df3_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\b6957711-1537-439a-8193-d0f247c02df3_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\b6b54d0e-c0f2-41ab-b9d7-145b82d26691_postimg.png",
@@ -13583,6 +13787,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\c8e1f79a-95f7-49e6-9f25-085de9eefc17_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\c9ca684e-eab6-429e-b386-125b48034fcc_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/c9ca684e-eab6-429e-b386-125b48034fcc_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\c9ca684e-eab6-429e-b386-125b48034fcc_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\c9d5a39e-2f6f-4a03-a8a1-f4bfc6668b61_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -13872,6 +14093,23 @@
       "OriginalItemSpec": "wwwroot\\PostsImages\\ce321af7-7ceb-4f69-801d-6d78f61b6d48_postimg.png"
     },
     {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\ce3fe7f7-30b3-42bd-9aed-1a2c98ac311c_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/ce3fe7f7-30b3-42bd-9aed-1a2c98ac311c_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\ce3fe7f7-30b3-42bd-9aed-1a2c98ac311c_postimg.png"
+    },
+    {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\ce54a844-5c5f-4689-bba5-044f22301a25_postimg.png",
       "SourceId": "backend",
       "SourceType": "Discovered",
@@ -13955,6 +14193,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\cf219379-df6c-4bb2-9b9c-e037bb08dd29_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\cf5645a3-4fdb-4d77-aa67-375b52a75b81_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/cf5645a3-4fdb-4d77-aa67-375b52a75b81_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\cf5645a3-4fdb-4d77-aa67-375b52a75b81_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\cf613eca-1667-472c-98c8-1b5bee4490d4_postimg.png",
@@ -16335,6 +16590,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\PostsImages\\f4985dc5-6a60-4aaa-8cf5-39eb9da97221_postimg.png"
+    },
+    {
+      "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\f5480324-8cad-4ec5-8607-5deb76e2a16d_postimg.png",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "PostsImages/f5480324-8cad-4ec5-8607-5deb76e2a16d_postimg.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\PostsImages\\f5480324-8cad-4ec5-8607-5deb76e2a16d_postimg.png"
     },
     {
       "Identity": "C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot\\PostsImages\\f55ffe50-0db2-42c9-aa30-f7aa5fcd80fe_postimg.png",
