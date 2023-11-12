@@ -183,7 +183,7 @@ public class PostServiceTest
 
     }
     [Fact]
-    public void should_to_save_post_image()
+    public async void should_to_save_post_image()
     {
         var postRepositoryMock = new Mock<IPostRepository>();
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
@@ -191,13 +191,14 @@ public class PostServiceTest
         var postService = new PostService(postRepositoryMock.Object, IWebHostEnvironmentMock.Object, userRepositoryMock.Object);
         var formfilemock = new Mock<IFormFile>();
         var streamMemory = new MemoryStream();
-        string pathRoot = AppDomain.CurrentDomain.BaseDirectory;
-        string relativePath = Path.Combine(pathRoot, "src", "backend", "wwwroot", "PostsImages");
-        IWebHostEnvironmentMock.Setup(we => we.WebRootPath).Returns(relativePath);
+        
+        var path = "C:\\caminho\\ficticio\\do\\diretorio\\raiz";
+    
+        IWebHostEnvironmentMock.Setup(we => we.WebRootPath).Returns(path);
         formfilemock.Setup(fl => fl.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
-        var imgname = "aaaaa.png";
-        postService.savePostImages(imgname, formfilemock.Object);
-        Assert.True(Directory.Exists(relativePath));
+        await postService.savePostImages("aaaaa", formfilemock.Object);
+        IWebHostEnvironmentMock.Verify(x => x.WebRootPath, Times.Exactly(2));
+        formfilemock.Verify(f => f.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None), Times.Once);
 
 
     }
@@ -399,7 +400,7 @@ public class PostServiceTest
 
         var listPostsUsersSearched = new List<PostsLinq>();
         var date = new DateTime();
-        postRepositoryMock.Setup(pr => pr.findPostsSearchedScrolling( date, "erick",userModelTest.id)).Returns(listPostsUsersSearched);
+        postRepositoryMock.Setup(pr => pr.findPostsSearchedScrolling(date, "erick", userModelTest.id)).Returns(listPostsUsersSearched);
 
         var result = postService.findPostsSearchedScrolling(userModelTest.id, date.ToString(), "erick");
 
