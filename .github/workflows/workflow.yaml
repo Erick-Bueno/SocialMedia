@@ -15,6 +15,6 @@ jobs:
       - name: run, build and test
         run: |
           cd src/backend
-          dotnet restore --configuration Release --no-restore
+          dotnet restore 
           dotnet build 
-          dotnet test --no-restore
+          dotnet test 
