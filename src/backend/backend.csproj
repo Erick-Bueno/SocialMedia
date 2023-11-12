@@ -19,5 +19,4 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="DotNetEnv" Version="2.5.0" />
   </ItemGroup>
-
 </Project>
