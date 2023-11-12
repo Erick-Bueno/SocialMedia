@@ -17,4 +17,4 @@ jobs:
           cd src/backend
           dotnet restore
           dotnet build
-          dotnet test --verbosity detailed
+          dotnet test -p:VSTestNoBuild=true
