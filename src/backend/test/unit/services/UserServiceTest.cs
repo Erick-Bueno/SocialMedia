@@ -98,12 +98,12 @@ public class UserServiceTest
 
     }
     [Fact]
-    public void image_profile_user_save_test()
+    public async void image_profile_user_save_test()
     {
         var IWebHostEnvironmentMock = new Mock<IWebHostEnvironment>();
         IWebHostEnvironmentMock.Setup(wh => wh.WebRootPath).Returns("C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot");
         var tokenRepository = new Mock<ITokenRepository>();
-        var nomeimg = "teste.png";
+       
         var IFormFileMock = new Mock<IFormFile>();
         var streamMock = new MemoryStream();
         IFormFileMock.Setup(ff => ff.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None)).Returns(Task.FromResult(0));
@@ -113,10 +113,10 @@ public class UserServiceTest
         var userRepositoryMock = new Mock<IUserRepository>();
         var userService = new UserService(userRepositoryMock.Object, IWebHostEnvironmentMock.Object, tokenRepository.Object, jwt.Object);
 
-        userService.saveUserPhoto(nomeimg, IFormFileMock.Object);
+        await userService.saveUserPhoto("bbbb.png", IFormFileMock.Object);
 
-        Assert.True(Directory.Exists("C:\\Users\\erick\\Documents\\GitHub\\SocialMedia\\src\\backend\\wwwroot"));
-
+        IWebHostEnvironmentMock.Verify(x => x.WebRootPath, Times.AtLeastOnce());
+        IFormFileMock.Verify(f => f.CopyToAsync(It.IsAny<Stream>(), CancellationToken.None), Times.Once);
 
     }
     [Fact]
